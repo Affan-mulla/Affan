@@ -1,5 +1,6 @@
 @import "tailwindcss";
 
+
 :root {
   --color-bg: rgb(240, 237, 229);
   --color-surface: rgb(244, 241, 234);
@@ -93,7 +94,7 @@ main {
 }
 
 a {
-  color: inherit;
+  /* color: inherit; */
   text-decoration: none;
 }
 
@@ -147,6 +148,7 @@ textarea {
   letter-spacing: 0.08em;
   text-transform: uppercase;
   white-space: nowrap;
+  box-shadow: 0 0 30px 2px var(--color-border);
 }
 
 @media (pointer: fine) {

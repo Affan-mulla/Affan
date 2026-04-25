@@ -42,7 +42,12 @@ export default function Home() {
       description:
         "Freelancer helping clients get more leads and better opportunities through SEO-ready portfolio websites and interactive product experiences.",
       email: "mailto:affanmulla077@gmail.com",
-      sameAs: ["https://instagram.com/aff4n_7", "https://x.com/_aff4n_"],
+      sameAs: [
+        "https://instagram.com/aff4n_7",
+        "https://x.com/_aff4n_",
+        "https://www.linkedin.com/in/affan-mulla-544341321/",
+        "https://github.com/Affan-mulla",
+      ],
       knowsAbout: [
         "Portfolio UX",
         "Web Design",
