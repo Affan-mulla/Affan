@@ -24,7 +24,6 @@ type SocialProfileCard = {
   handle: string;
   name: string;
   bio: string;
-  stats: Array<{ label: string; value: string }>;
   accent: string;
   banner?: string;
   avatar: string;
@@ -84,11 +83,6 @@ const socialProfiles: SocialProfileCard[] = [
     handle: "affan-mulla-544341321",
     name: "Affan Mulla",
     bio: "Product designer focused on clarity, conversion, and high-trust client-facing work.",
-    stats: [
-      { label: "connections", value: "500+" },
-      { label: "followers", value: "740" },
-      { label: "posts", value: "28" },
-    ],
     accent: "#0A66C2",
     banner:
       "https://pbs.twimg.com/profile_banners/1794432856040599552/1769402162/1080x360",
@@ -120,11 +114,6 @@ const socialProfiles: SocialProfileCard[] = [
     handle: "aff4n_7",
     name: "Affan Mulla",
     bio: "Portfolio visuals, motion snippets, and behind-the-scenes design process.",
-    stats: [
-      { label: "posts", value: "93" },
-      { label: "followers", value: "2.4k" },
-      { label: "following", value: "148" },
-    ],
     accent: "#E1306C",
     avatar: "https://pbs.twimg.com/profile_images/2015644864675737601/m8438SjA_400x400.jpg",
     ctaLabel: "Follow",
@@ -154,11 +143,6 @@ const socialProfiles: SocialProfileCard[] = [
     handle: "@_aff4n_",
     name: "Affan Mulla",
     bio: "Short updates, web product notes, and design opinions from active client work.",
-    stats: [
-      { label: "posts", value: "412" },
-      { label: "followers", value: "1.1k" },
-      { label: "following", value: "206" },
-    ],
     accent: "#1D9BF0",
     banner:
       "https://pbs.twimg.com/profile_banners/1794432856040599552/1769402162/1080x360",
@@ -190,11 +174,6 @@ const socialProfiles: SocialProfileCard[] = [
     handle: "Affan-mulla",
     name: "Affan Mulla",
     bio: "Code, shipped interfaces, and practical front-end experiments for client products.",
-    stats: [
-      { label: "repos", value: "24" },
-      { label: "followers", value: "86" },
-      { label: "stars", value: "117" },
-    ],
     accent: "#111827",
     avatar: "https://avatars.githubusercontent.com/u/161614493?v=4",
     ctaLabel: "Sponsor",
@@ -274,39 +253,9 @@ function SocialHoverCard({
             {profile.bio}
           </p>
 
-          <div className="mt-4  gap-2">
-            {profile.id === "linkedin" ? (
-              <p className="text-sm text-blue-400">100 Connections</p>
-            ) : profile.id === "instagram" ? (
-              <p>2.4k Followers</p>
-            ) : profile.id === "twitter" ? (
-             <div className="flex w-full flex-1 text-sm gap-4 ">
-                <div>
-                  <p className="text-foreground">
-                    223 <span className="text-muted"> Following</span>
-                  </p>
-                </div>{" "}
-                <div>
-                  <p className="text-foreground">
-                    423<span className="text-muted"> Followers</span>
-                  </p>
-                </div>
-              </div>
-            ) : (
-              <div className="flex w-full flex-1 text-sm gap-4 ">
-                <div>
-                  <p className="text-foreground">
-                    30 <span className="text-muted"> Repository</span>
-                  </p>
-                </div>{" "}
-                <div>
-                  <p className="text-foreground">
-                    100<span className="text-muted"> Followers</span>
-                  </p>
-                </div>
-              </div>
-            )}
-          </div>
+          <p className="mt-3 text-xs text-muted">
+            View {profile.handle} on {profile.platform}
+          </p>
         </div>
       </div>
     </motion.div>
@@ -503,7 +452,7 @@ export function ContactSection({ onCursorLabel }: ContactSectionProps) {
       </div>
 
       <p className="pt-6 text-center text-sm text-muted">
-        (c) {new Date().getFullYear()} Affan Mulla - Freelance Product Designer
+        © {new Date().getFullYear()} Affan Mulla - Freelance Product Designer
       </p>
     </motion.section>
   );

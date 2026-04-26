@@ -88,7 +88,7 @@ export function FloatingNav({
             type="button"
             onClick={onThemeToggle}
             onMouseEnter={() => onCursorLabel("Theme")}
-            className="inline-flex items-center gap-1.5 rounded-full border border- px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.08em] border-border hover:bg-foreground hover:text-background"
+            className="inline-flex items-center gap-1.5 rounded-full border border-(--color-border) px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.08em] hover:bg-foreground hover:text-background"
           >
            <span className="mr-1 text-[15px]">◑ </span>
             {isDark ? "Dark" : "Light"}

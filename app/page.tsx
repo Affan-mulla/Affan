@@ -3,7 +3,13 @@
 import { useEffect, useMemo, useState } from "react";
 import { AboutSection } from "@/app/components/sections/AboutSection";
 import { ContactSection } from "@/app/components/sections/ContactSection";
+import { FaqSection } from "@/app/components/sections/FaqSection";
 import { HeroSection } from "@/app/components/sections/HeroSection";
+import { MarqueeSection } from "@/app/components/sections/MarqueeSection";
+import { ProcessSection } from "@/app/components/sections/ProcessSection";
+import { ServicesSection } from "@/app/components/sections/ServicesSection";
+import { StatsSection } from "@/app/components/sections/StatsSection";
+import { TestimonialsSection } from "@/app/components/sections/TestimonialsSection";
 import { WorkSection } from "@/app/components/sections/WorkSection";
 import {
   caseStudies,
@@ -11,6 +17,7 @@ import {
   type NavSection,
   navSections,
   skillPills,
+  testimonials,
 } from "@/app/components/portfolio-data";
 import { CustomCursor } from "@/app/components/CustomCursor";
 
@@ -204,8 +211,14 @@ export default function Home() {
           onThemeToggle={() => setTheme(isDark ? "light" : "dark")}
           theme={theme}
         />
+        <MarqueeSection />
+        <ServicesSection onCursorLabel={handleCursorLabel} />
+        <ProcessSection />
+        <StatsSection />
 
         <WorkSection caseStudies={caseStudies} onCursorLabel={handleCursorLabel} />
+        <TestimonialsSection testimonials={testimonials} />
+        <FaqSection />
 
         <AboutSection
           experienceList={experienceList}

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter, Syne } from "next/font/google";
+import { PageTransition } from "@/app/components/PageTransition";
 import "./globals.css";
 
 const inter = Inter({
@@ -30,16 +31,21 @@ export const metadata: Metadata = {
     "seo portfolio website",
   ],
   alternates: {
-    canonical: "https://yourdomain.com",
+    canonical: "https://affanmulla.com",
   },
   openGraph: {
     title: "Affan Mulla | Freelance Product Designer",
     description:
       "SEO-focused, conversion-driven portfolio website by Affan Mulla for clients and collaborations.",
-    url: "https://yourdomain.com",
+    url: "https://affanmulla.com",
     siteName: "Affan Mulla Portfolio",
     type: "website",
   },
+  robots: {
+    index: true,
+    follow: true,
+  },
+  authors: [{ name: "Affan Mulla" }],
   twitter: {
     card: "summary_large_image",
     title: "Affan Mulla | Freelance Product Designer",
@@ -57,7 +63,9 @@ export default function RootLayout({
       lang="en"
       className={`${inter.variable} ${syne.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col">
+        <PageTransition>{children}</PageTransition>
+      </body>
     </html>
   );
 }
