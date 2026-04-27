@@ -291,7 +291,7 @@ function SocialLinkCard({
   );
 
   return (
-    <div className="relative inline-flex">
+    <div className="relative flex w-full">
       <a
         href={profile.href}
         target="_blank"
@@ -324,7 +324,7 @@ function SocialLinkCard({
           onDeactivate();
           setIsHovered(false);
         }}
-        className="inline-flex items-center gap-2 bg-foreground px-2 py-1 text-xs text-background transition-colors duration-200 hover:bg-foreground/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2"
+        className="inline-flex w-full items-center justify-center gap-2 bg-foreground px-3 py-2 text-xs text-background transition-colors duration-200 hover:bg-foreground/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 sm:px-2 sm:py-1"
       >
         <motion.span className="relative inline-flex h-4 w-4 items-center justify-center overflow-hidden">
           <motion.span
@@ -428,8 +428,8 @@ export function ContactSection({ onCursorLabel }: ContactSectionProps) {
         </h2>
       </div>
 
-      <div className="grid gap-7 sm:grid-cols-[1fr_auto] sm:items-end">
-        <div className="text-[1.05rem] text-muted">
+      <div className="grid gap-8 md:grid-cols-[minmax(0,2fr)_auto] md:items-end">
+        <div className="space-y-3 text-[1.05rem] text-muted">
           <div className="mb-8">
             <ContactCtaButton
               href="https://www.cal.eu/affan/15min?overlayCalendar=true"
@@ -448,7 +448,7 @@ export function ContactSection({ onCursorLabel }: ContactSectionProps) {
               setCopied(true);
               setTimeout(() => setCopied(false), 2000);
             }}
-            className="group relative flex items-center text-sm text-muted transition-colors hover:text-foreground"
+            className="group relative inline-flex w-fit items-center text-sm text-muted transition-colors hover:text-foreground"
           >
             <span>affanmulla077@gmail.com</span>
             <span className="pointer-events-none absolute left-full top-1/2 ml-2 -translate-y-1/2">
@@ -478,10 +478,10 @@ export function ContactSection({ onCursorLabel }: ContactSectionProps) {
               </AnimatePresence>
             </span>
           </button>
-          <p>Gujarat, India</p>
+          <p className="text-sm">Gujarat, India</p>
         </div>
 
-        <div className="flex flex-wrap items-center divide-x-2 text-xs font-semibold uppercase tracking-widest text-muted">
+        <div className="grid w-full grid-cols-2 gap-2 text-xs font-semibold uppercase tracking-widest text-muted sm:w-auto sm:grid-cols-4 sm:gap-0 sm:divide-x-2 sm:divide-border">
           {socialProfiles.map((profile) => (
             <SocialLinkCard
               key={profile.id}
