@@ -8,7 +8,7 @@ type UseScrollProgressOptions = {
 };
 
 type UseScrollProgressReturn = {
-  wrapperRef: React.RefObject<HTMLDivElement>;
+  wrapperRef: React.RefObject<HTMLDivElement | null>;
   progress: number; // 0->1 raw scroll progress through entire section
   activeIndex: number; // 0->4 which step is currently active
   lineProgress: number; // 0->1 how far the connecting line is drawn
