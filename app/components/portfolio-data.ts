@@ -93,7 +93,7 @@ export const caseStudies: CaseStudy[] = [
 export const serviceTiers: ServiceTier[] = [
   {
     name: "Starter",
-    price: "from £800",
+    price: "from £500",
     description: "Perfect for freelancers who need a first serious portfolio",
     deliverables: [
       "Single-page portfolio",
@@ -107,7 +107,7 @@ export const serviceTiers: ServiceTier[] = [
   },
   {
     name: "Growth",
-    price: "from £1,400",
+    price: "from £1,200",
     description: "For established freelancers ready to attract higher-budget clients",
     deliverables: [
       "Multi-page portfolio",
@@ -123,7 +123,7 @@ export const serviceTiers: ServiceTier[] = [
   },
   {
     name: "Premium",
-    price: "from £2,200",
+    price: "from £2,000+",
     description: "Full brand + web presence for agencies and serious professionals",
     deliverables: [
       "Custom design system",

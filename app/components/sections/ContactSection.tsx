@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import {
   AnimatePresence,
@@ -10,6 +10,7 @@ import {
 import { createPortal } from "react-dom";
 import { useCallback, useState, type ReactNode } from "react";
 import Image from "next/image";
+import { ContactCtaButton } from "../ContactCtaButton";
 
 type ContactSectionProps = {
   onCursorLabel: (label: string) => void;
@@ -360,8 +361,10 @@ function SocialLinkCard({
 }
 
 export function ContactSection({ onCursorLabel }: ContactSectionProps) {
-  const [isTalkHovered, setIsTalkHovered] = useState(false);
   const [activeSocial, setActiveSocial] = useState<string | null>(null);
+  const [copied, setCopied] = useState(false);
+  const sayHiChars = "Say hi!".split("");
+  const letsTalkChars = "Let's talk?".split("");
 
   return (
     <motion.section
@@ -377,59 +380,105 @@ export function ContactSection({ onCursorLabel }: ContactSectionProps) {
           Get in Touch
         </p>
         <h2 className="font-display text-[clamp(3.1rem,11vw,9rem)] font-extrabold leading-35 tracking-tighter">
-          <span className="block">Say hi!</span>
+          <span className="block overflow-hidden">
+            {sayHiChars.map((char, index) => (
+              <motion.span
+                key={`say-${char}-${index}`}
+                initial={{ opacity: 0, y: "80%" }}
+                animate={{ opacity: 1, y: "0%" }}
+                transition={{
+                  duration: 0.5,
+                  ease: [0.22, 1, 0.36, 1],
+                  delay: index * 0.04,
+                }}
+                className="inline-block"
+              >
+                {char === " " ? "\u00A0" : char}
+              </motion.span>
+            ))}
+          </span>
           <motion.a
             href="https://www.cal.eu/affan/15min?overlayCalendar=true"
             target="_blank"
             rel="noopener noreferrer"
             onMouseEnter={() => onCursorLabel("Book Call")}
-            onHoverStart={() => setIsTalkHovered(true)}
-            onHoverEnd={() => setIsTalkHovered(false)}
-            onFocus={() => {
-              onCursorLabel("Book Call");
-              setIsTalkHovered(true);
-            }}
-            onBlur={() => setIsTalkHovered(false)}
+            onFocus={() => onCursorLabel("Book Call")}
             className="group inline-flex items-center gap-2 rounded-sm transition-colors duration-300 hover:text-(--color-accent) focus-visible:text-(--color-accent) focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-(--color-accent) focus-visible:ring-offset-2"
           >
             <span className="relative block">
-              Let&apos;s talk
+              <span className="overflow-hidden">
+                {letsTalkChars.map((char, index) => (
+                  <motion.span
+                    key={`talk-${char}-${index}`}
+                    initial={{ opacity: 0, y: "80%" }}
+                    animate={{ opacity: 1, y: "0%" }}
+                    transition={{
+                      duration: 0.5,
+                      ease: [0.22, 1, 0.36, 1],
+                      delay: 0.3 + index * 0.04,
+                    }}
+                    className="inline-block"
+                  >
+                    {char === " " ? "\u00A0" : char}
+                  </motion.span>
+                ))}
+              </span>
               <span
                 aria-hidden="true"
                 className="absolute bottom-0 left-0 h-0.5 w-full origin-left scale-x-0 bg-current transition-transform duration-300 group-hover:scale-x-100 group-focus-visible:scale-x-100"
               />
-            </span>
-            <span
-              className="relative inline-flex h-[1em] w-[1em] overflow-hidden"
-              aria-hidden="true"
-            >
-              <motion.span
-                animate={
-                  isTalkHovered
-                    ? { y: [8, 0, -8], x: [-8, 0, 8], opacity: [0, 1, 0] }
-                    : { y: 0, x: 0, opacity: 1 }
-                }
-                transition={
-                  isTalkHovered
-                    ? {
-                        duration: 1.2,
-                        repeat: Infinity,
-                        ease: "easeInOut" as const,
-                      }
-                    : { duration: 0.2 }
-                }
-                className="absolute left-0 top-0 inline-flex"
-              >
-                ?
-              </motion.span>
             </span>
           </motion.a>
         </h2>
       </div>
 
       <div className="grid gap-7 sm:grid-cols-[1fr_auto] sm:items-end">
-        <div className="space-y-1 text-[1.05rem] text-muted">
-          <p>affanmulla077@gmail.com</p>
+        <div className="text-[1.05rem] text-muted">
+          <div className="mb-8">
+            <ContactCtaButton
+              href="https://www.cal.eu/affan/15min?overlayCalendar=true"
+              target="_blank"
+              rel="noopener noreferrer"
+              label="Book a free call"
+              cursorLabel="Book"
+              onCursorLabel={onCursorLabel}
+              size="default"
+            />
+          </div>
+
+          <button
+            onClick={() => {
+              navigator.clipboard.writeText("affanmulla077@gmail.com");
+              setCopied(true);
+              setTimeout(() => setCopied(false), 2000);
+            }}
+            className="group flex items-center gap-2 text-sm text-muted transition-colors hover:text-foreground"
+          >
+            <span>affanmulla077@gmail.com</span>
+            <AnimatePresence mode="wait">
+              {copied ? (
+                <motion.span
+                  key="check"
+                  initial={{ scale: 0.5, opacity: 0 }}
+                  animate={{ scale: 1, opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  className="text-[10px] font-semibold uppercase tracking-widest text-(--color-accent)"
+                >
+                  Copied
+                </motion.span>
+              ) : (
+                <motion.span
+                  key="icon"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  className="text-[10px] text-muted opacity-0 transition-opacity group-hover:opacity-100"
+                >
+                  click to copy
+                </motion.span>
+              )}
+            </AnimatePresence>
+          </button>
           <p>Gujarat, India</p>
         </div>
 
@@ -452,8 +501,9 @@ export function ContactSection({ onCursorLabel }: ContactSectionProps) {
       </div>
 
       <p className="pt-6 text-center text-sm text-muted">
-        © {new Date().getFullYear()} Affan Mulla - Freelance Product Designer
+        {"\u00A9"} {new Date().getFullYear()} Affan Mulla - Freelance Product Designer
       </p>
     </motion.section>
   );
 }
+

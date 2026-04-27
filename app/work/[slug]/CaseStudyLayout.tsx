@@ -3,7 +3,7 @@
 import { motion, useScroll } from "framer-motion";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { ContactCtaButton } from "@/app/components/ContactCtaButton";
 import type { CaseStudyFull, CaseStudySection } from "@/app/components/portfolio-data";
 
@@ -13,7 +13,18 @@ type CaseStudyLayoutProps = {
 
 export function CaseStudyLayout({ study }: CaseStudyLayoutProps) {
   const router = useRouter();
-  const { scrollYProgress } = useScroll();
+  const contentRef = useRef<HTMLElement | null>(null);
+  const { scrollYProgress } = useScroll({ target: contentRef });
+  const sectionParentVariants = {
+    hidden: {},
+    show: {
+      transition: { staggerChildren: 0.15 },
+    },
+  };
+  const sectionVariants = {
+    hidden: { opacity: 0, y: 20 },
+    show: { opacity: 1, y: 0 },
+  };
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "instant" as ScrollBehavior });
@@ -24,10 +35,8 @@ export function CaseStudyLayout({ study }: CaseStudyLayoutProps) {
       return (
         <motion.section
           key={`${section.type}-${index}`}
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.2 }}
-          transition={{ duration: 0.35, delay: index * 0.05 }}
+          variants={sectionVariants}
+          transition={{ duration: 0.35 }}
           className="grid gap-8 md:grid-cols-[1.4fr_1fr]"
         >
           <div className="space-y-4">
@@ -56,10 +65,8 @@ export function CaseStudyLayout({ study }: CaseStudyLayoutProps) {
       return (
         <motion.section
           key={`${section.type}-${index}`}
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.2 }}
-          transition={{ duration: 0.35, delay: index * 0.05 }}
+          variants={sectionVariants}
+          transition={{ duration: 0.35 }}
           className="space-y-8"
         >
           <blockquote className="relative space-y-5 border-l-2 border-(--color-accent) pl-6">
@@ -94,10 +101,8 @@ export function CaseStudyLayout({ study }: CaseStudyLayoutProps) {
       return (
         <motion.section
           key={`${section.type}-${index}`}
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.2 }}
-          transition={{ duration: 0.35, delay: index * 0.05 }}
+          variants={sectionVariants}
+          transition={{ duration: 0.35 }}
           className="space-y-6"
         >
           <div className="space-y-4">
@@ -120,20 +125,21 @@ export function CaseStudyLayout({ study }: CaseStudyLayoutProps) {
       );
     }
 
+    const firstSentence = section.body.split(".")[0]?.trim();
+    const pullQuote = firstSentence ? `${firstSentence}.` : section.body;
+
     return (
       <motion.section
         key={`${section.type}-${index}`}
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.2 }}
-        transition={{ duration: 0.35, delay: index * 0.05 }}
+        variants={sectionVariants}
+        transition={{ duration: 0.35 }}
         className="space-y-6"
       >
         <h2 className="text-3xl font-bold tracking-tight">{section.heading}</h2>
         <p className="text-sm leading-7 text-(--color-text-muted)">{section.body}</p>
 
         <div className="border-l-2 border-(--color-accent) bg-(--color-surface) pl-4 py-2">
-          <p className="text-sm leading-7 text-(--color-text-muted)">"{section.body}"</p>
+          <p className="text-sm leading-7 text-(--color-text-muted)">"{pullQuote}"</p>
         </div>
 
         <ContactCtaButton
@@ -153,32 +159,39 @@ export function CaseStudyLayout({ study }: CaseStudyLayoutProps) {
         style={{ scaleX: scrollYProgress, transformOrigin: "left" }}
       />
 
-      <button
-        type="button"
-        onClick={() => {
-          if (window.history.length > 1) {
-            router.back();
-            return;
-          }
-
-          router.push("/");
-        }}
-        className="fixed left-4 top-4 z-50 border border-(--color-border) bg-(--color-surface) px-3 py-2 text-xs font-semibold uppercase tracking-[0.08em] text-foreground transition-colors hover:bg-(--color-surface-2)"
-      >
-        {"\u2190"} Back
-      </button>
-
       <div
-        className="flex min-h-[50vh] items-center justify-center px-4 text-center"
+        className="relative flex min-h-[50vh] items-center justify-center px-4 text-center"
         style={{ background: study.visual }}
       >
+        <button
+          type="button"
+          onClick={() => {
+            if (window.history.length > 1) {
+              router.back();
+              return;
+            }
+
+            router.push("/");
+          }}
+          className="absolute left-4 top-4 z-50 border border-(--color-border) bg-(--color-surface) px-3 py-2 text-xs font-semibold uppercase tracking-[0.08em] text-foreground transition-colors hover:bg-(--color-surface-2)"
+        >
+          {"\u2190"} Back
+        </button>
         <h1 className="font-display text-[clamp(2.5rem,7vw,5rem)] font-extrabold leading-[0.95] tracking-[-0.03em] text-white">
           {study.title}
         </h1>
       </div>
 
-      <main className="mx-auto max-w-3xl space-y-20 px-4 py-16">
-        {study.sections.map((section, index) => renderSection(section, index))}
+      <main ref={contentRef} className="mx-auto max-w-3xl px-4 py-16">
+        <motion.div
+          variants={sectionParentVariants}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, amount: 0.1 }}
+          className="space-y-20"
+        >
+          {study.sections.map((section, index) => renderSection(section, index))}
+        </motion.div>
       </main>
     </div>
   );

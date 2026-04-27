@@ -1,7 +1,7 @@
 "use client";
 
-import { AnimatePresence, motion } from "framer-motion";
-import { useState } from "react";
+import { AnimatePresence, motion, useInView } from "framer-motion";
+import { useEffect, useRef, useState, type MutableRefObject } from "react";
 
 const faqs = [
   {
@@ -41,8 +41,78 @@ const faqs = [
   },
 ];
 
+function FaqRow({
+  answer,
+  index,
+  isOpen,
+  onToggle,
+  question,
+  rowRefs,
+}: {
+  answer: string;
+  index: number;
+  isOpen: boolean;
+  onToggle: () => void;
+  question: string;
+  rowRefs: MutableRefObject<Array<HTMLDivElement | null>>;
+}) {
+  const rowRef = useRef<HTMLDivElement | null>(null);
+  const isInView = useInView(rowRef, { amount: 0.4, once: true });
+
+  useEffect(() => {
+    rowRefs.current[index] = rowRef.current;
+  }, [index, rowRefs]);
+
+  return (
+    <motion.div
+      ref={rowRef}
+      initial={{ opacity: 0, x: -12 }}
+      animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -12 }}
+      transition={{ duration: 0.4, ease: "easeOut", delay: index * 0.06 }}
+      className="border-b border-(--color-border)"
+    >
+      <button
+        type="button"
+        className="w-full py-4 text-left text-sm font-semibold flex items-center justify-between hover:bg-(--color-surface) transition-colors duration-200 hover:text-foreground/90"
+        onClick={onToggle}
+        aria-expanded={isOpen}
+      >
+        <span>{question}</span>
+        <motion.div
+          animate={{ rotate: isOpen ? 45 : 0 }}
+          transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
+          className="flex-shrink-0"
+        >
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+            <path d="M8 2V14M2 8H14" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+          </svg>
+        </motion.div>
+      </button>
+
+      <AnimatePresence initial={false}>
+        {isOpen ? (
+          <motion.div
+            layout
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{
+              height: { duration: 0.35, ease: [0.22, 1, 0.36, 1] },
+              opacity: { duration: 0.22, ease: "easeOut" },
+            }}
+            className="overflow-hidden"
+          >
+            <p className="pb-4 text-sm leading-7 text-(--color-text-muted)">{answer}</p>
+          </motion.div>
+        ) : null}
+      </AnimatePresence>
+    </motion.div>
+  );
+}
+
 export function FaqSection() {
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
+  const rowRefs = useRef<Array<HTMLDivElement | null>>([]);
 
   return (
     <motion.section
@@ -67,31 +137,15 @@ export function FaqSection() {
           const isOpen = activeIndex === index;
 
           return (
-            <div key={item.question} className="border-b border-(--color-border)">
-              <button
-                type="button"
-                className="w-full py-4 text-left text-sm font-semibold flex items-center justify-between"
-                onClick={() => setActiveIndex((current) => (current === index ? null : index))}
-                aria-expanded={isOpen}
-              >
-                <span>{item.question}</span>
-                <span aria-hidden="true">{isOpen ? "\u00D7" : "+"}</span>
-              </button>
-
-              <AnimatePresence initial={false}>
-                {isOpen ? (
-                  <motion.div
-                    initial={{ height: 0, opacity: 0 }}
-                    animate={{ height: "auto", opacity: 1 }}
-                    exit={{ height: 0, opacity: 0 }}
-                    transition={{ duration: 0.25, ease: "easeOut" }}
-                    className="overflow-hidden"
-                  >
-                    <p className="pb-4 text-sm leading-7 text-(--color-text-muted)">{item.answer}</p>
-                  </motion.div>
-                ) : null}
-              </AnimatePresence>
-            </div>
+            <FaqRow
+              key={item.question}
+              answer={item.answer}
+              index={index}
+              isOpen={isOpen}
+              onToggle={() => setActiveIndex((current) => (current === index ? null : index))}
+              question={item.question}
+              rowRefs={rowRefs}
+            />
           );
         })}
       </div>

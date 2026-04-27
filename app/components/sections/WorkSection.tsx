@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 import type { CaseStudy } from "../portfolio-data";
+import Border from "../Border";
 
 type WorkSectionProps = {
   caseStudies: CaseStudy[];
@@ -41,18 +42,7 @@ export function WorkSection({ caseStudies, onCursorLabel }: WorkSectionProps) {
               whileHover="hover"
               className="group relative grid overflow-hidden border border-border bg-(--color-surface-2) md:grid-cols-[1fr_1.1fr]"
             >
-              <motion.span
-                className={borderClass + " top-0 left-0 border-t border-l"}
-              />
-              <motion.span
-                className={borderClass + " right-0 top-0 border-t border-r"}
-              />
-              <motion.span
-                className={borderClass + " left-0 bottom-0 border-b border-l"}
-              />
-              <motion.span
-                className={borderClass + " right-0 bottom-0 border-b border-r"}
-              />
+             <Border/>
               <div className="space-y-5 p-5 sm:p-7">
                 <div className="flex items-center justify-between gap-3">
                   <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-muted">
@@ -64,17 +54,17 @@ export function WorkSection({ caseStudies, onCursorLabel }: WorkSectionProps) {
                     </span>
                   )}
                 </div>
-                <p className="text-xs font-semibold uppercase tracking-[0.12em] text-(--color-text-muted)">
+                <p className="text-xs font-semibold uppercase tracking-[0.12em] text-muted">
                   Concept Project / {project.period}
                 </p>
                 <h3 className="max-w-xl text-3xl font-bold leading-tight tracking-tight">{project.title}</h3>
-                <p className="max-w-xl text-sm leading-7 text-(--color-text-muted)">{project.description}</p>
+                <p className="max-w-xl text-sm leading-7 text-muted">{project.description}</p>
 
                 <div className="flex flex-wrap gap-2">
                   {project.tags.map((tag) => (
                     <span
                       key={`${project.index}-${tag}`}
-                      className="rounded-full border border-(--color-border) px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.08em] text-(--color-text-muted)"
+                      className="rounded-full border border-border px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.08em] text-muted"
                     >
                       {tag}
                     </span>
@@ -83,18 +73,18 @@ export function WorkSection({ caseStudies, onCursorLabel }: WorkSectionProps) {
 
                 <div className="grid gap-2 pt-2 sm:grid-cols-3">
                   {project.highlights.map((item) => (
-                    <p key={item} className="text-xs font-medium leading-5 text-(--color-text-muted)">
+                    <p key={item} className="text-xs font-medium leading-5 text-muted">
                       {item}
                     </p>
                   ))}
                 </div>
 
                 {isWip ? (
-                  <p className="mt-2 text-xs font-semibold uppercase tracking-[0.1em] text-(--color-text-muted)">
+                  <p className="mt-2 text-xs font-semibold uppercase tracking-widest text-muted">
                     Coming soon
                   </p>
                 ) : (
-                  <p className="group mt-2 flex items-center gap-1.5 text-xs font-semibold uppercase tracking-[0.1em] text-(--color-accent)">
+                  <p className="group mt-2 flex items-center gap-1.5 text-xs font-semibold uppercase tracking-widest text-(--color-accent)">
                     Read case study
                     <svg
                       viewBox="0 0 24 24"

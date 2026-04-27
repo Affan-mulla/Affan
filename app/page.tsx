@@ -25,14 +25,8 @@ export default function Home() {
   const [activeSection, setActiveSection] = useState("home");
   const [isPastHeroThreshold, setIsPastHeroThreshold] = useState(false);
   const [isTouch, setIsTouch] = useState(false);
-  const [theme, setTheme] = useState<"light" | "dark">(() => {
-    if (typeof window === "undefined") {
-      return "light";
-    }
-
-    const storedTheme = window.localStorage.getItem("affan-theme");
-    return storedTheme === "dark" ? "dark" : "light";
-  });
+  const [theme, setTheme] = useState<"light" | "dark">("light");
+  const [themeInitialized, setThemeInitialized] = useState(false);
   const [cursor, setCursor] = useState({
     x: -100,
     y: -100,
@@ -100,10 +94,20 @@ export default function Home() {
   }, [isTouch]);
 
   useEffect(() => {
+    const storedTheme = window.localStorage.getItem("affan-theme");
+    setTheme(storedTheme === "dark" ? "dark" : "light");
+    setThemeInitialized(true);
+  }, []);
+
+  useEffect(() => {
+    if (!themeInitialized) {
+      return;
+    }
+
     document.documentElement.dataset.theme = theme;
     document.documentElement.style.colorScheme = theme;
     window.localStorage.setItem("affan-theme", theme);
-  }, [theme]);
+  }, [theme, themeInitialized]);
 
   useEffect(() => {
     const onScroll = () => {
@@ -200,11 +204,11 @@ export default function Home() {
 
       <CustomCursor cursor={cursor} isTouch={isTouch} />
 
-
         <main className="relative  flex w-full flex-col gap-16 px-4 pb-16 sm:px-8 sm:pb-20 md:gap-24">
         
         <HeroSection
           activeSection={activeSection}
+          isTouch={isTouch}
           navCollapsed={navCollapsed}
           navSections={navSections}
           onCursorLabel={handleCursorLabel}
