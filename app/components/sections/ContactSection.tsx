@@ -35,7 +35,7 @@ type SocialProfileCard = {
 
 const CARD_WIDTH = 320;
 const CARD_HEIGHT = 248;
-const CARD_OFFSET = 10;
+const CARD_OFFSET = 12;
 const CARD_GUTTER = 12;
 
 function clamp(value: number, min: number, max: number) {
@@ -210,14 +210,16 @@ function SocialHoverCard({
 
   const card = (
     <motion.div
-      initial={{ opacity: 0, scale: 0.96 }}
-      animate={{ opacity: 1, scale: 1 }}
-      exit={{ opacity: 0, scale: 0.96 }}
-      transition={{ duration: 0.16, ease: "easeOut" }}
       style={{ x, y, position: "fixed" }}
       className="pointer-events-none z-50"
     >
-      <div className="w-80 overflow-hidden border border-border shadow-[0_20px_60px_rgba(0,0,0,0.22)] bg-background">
+      <motion.div
+        initial={{ opacity: 0, scale: 0.95, y: 8, filter: "blur(4px)" }}
+        animate={{ opacity: 1, scale: 1, y: 0, filter: "blur(0px)" }}
+        exit={{ opacity: 0, scale: 0.97, y: 6, filter: "blur(2px)" }}
+        transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] }}
+        className="w-80 overflow-hidden border border-border bg-(--color-surface-2) shadow-[0_20px_60px_rgba(0,0,0,0.22)]"
+      >
         {
           profile.banner && (
             <Image src={profile.banner} width={320} height={80} alt="Banner" className="h-20 object-cover" style={{ background: profile.banner }} />
@@ -236,29 +238,23 @@ function SocialHoverCard({
               />
             </div>
           </div>
-          <div className="min-w-0">
-            <p className="truncate text-sm font-semibold">{profile.name}</p>
-            <p
-              style={{
-                color: isDark ? "#94a3b8" : "var(--color-text-muted)",
-              }}
-              className="truncate text-xs"
-            >
-              {profile.id !== "linkedin" && profile.handle}
-            </p>
-          </div>
+          <p className="mt-3 truncate text-sm font-semibold text-foreground">{profile.name}</p>
           <p
-            style={{ color: isDark ? "#cbd5e1" : "var(--color-text-muted)" }}
+            className="truncate text-xs text-muted"
+          >
+            {profile.id !== "linkedin" && profile.handle}
+          </p>
+          <p
             className="mt-2 text-sm leading-5"
           >
             {profile.bio}
           </p>
 
-          <p className="mt-3 text-xs text-muted">
+          <p className="mt-3 border-t border-border/70 pt-2 text-xs text-muted">
             View {profile.handle} on {profile.platform}
           </p>
         </div>
-      </div>
+      </motion.div>
     </motion.div>
   );
 
@@ -281,15 +277,15 @@ function SocialLinkCard({
   const [isHovered, setIsHovered] = useState(false);
   const rawX = useMotionValue(0);
   const rawY = useMotionValue(0);
-  const smoothX = useSpring(rawX, { stiffness: 380, damping: 34, mass: 0.35 });
-  const smoothY = useSpring(rawY, { stiffness: 380, damping: 34, mass: 0.35 });
+  const smoothX = useSpring(rawX, { stiffness: 520, damping: 38, mass: 0.28 });
+  const smoothY = useSpring(rawY, { stiffness: 520, damping: 38, mass: 0.28 });
   const portalTarget = typeof document === "undefined" ? null : document.body;
 
   const setCardPosition = useCallback(
     (clientX: number, clientY: number) => {
       const { x, y } = positionCard(clientX, clientY);
       rawX.set(x);
-      rawY.set(y - 50);
+      rawY.set(y);
     },
     [rawX, rawY],
   );
@@ -328,7 +324,7 @@ function SocialLinkCard({
           onDeactivate();
           setIsHovered(false);
         }}
-        className="inline-flex items-center gap-2 bg-foreground px-2 py-1 text-xs text-background transition-colors duration-200 hover:bg-foreground/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-(--color-accent) focus-visible:ring-offset-2"
+        className="inline-flex items-center gap-2 bg-foreground px-2 py-1 text-xs text-background transition-colors duration-200 hover:bg-foreground/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2"
       >
         <motion.span className="relative inline-flex h-4 w-4 items-center justify-center overflow-hidden">
           <motion.span
@@ -379,7 +375,7 @@ export function ContactSection({ onCursorLabel }: ContactSectionProps) {
         <p className="text-xs font-semibold uppercase tracking-[0.16em] text-muted">
           Get in Touch
         </p>
-        <h2 className="font-display text-[clamp(3.1rem,11vw,9rem)] font-extrabold leading-35 tracking-tighter">
+        <h2 className="font-display text-[clamp(3rem,8vw,6rem)] font-extrabold leading-[0.9] tracking-[-0.04em]">
           <span className="block overflow-hidden">
             {sayHiChars.map((char, index) => (
               <motion.span
@@ -403,7 +399,7 @@ export function ContactSection({ onCursorLabel }: ContactSectionProps) {
             rel="noopener noreferrer"
             onMouseEnter={() => onCursorLabel("Book Call")}
             onFocus={() => onCursorLabel("Book Call")}
-            className="group inline-flex items-center gap-2 rounded-sm transition-colors duration-300 hover:text-(--color-accent) focus-visible:text-(--color-accent) focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-(--color-accent) focus-visible:ring-offset-2"
+            className="group inline-flex items-center gap-2 rounded-sm transition-colors duration-300 hover:text-accent focus-visible:text-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2"
           >
             <span className="relative block">
               <span className="overflow-hidden">
@@ -452,32 +448,35 @@ export function ContactSection({ onCursorLabel }: ContactSectionProps) {
               setCopied(true);
               setTimeout(() => setCopied(false), 2000);
             }}
-            className="group flex items-center gap-2 text-sm text-muted transition-colors hover:text-foreground"
+            className="group relative flex items-center text-sm text-muted transition-colors hover:text-foreground"
           >
             <span>affanmulla077@gmail.com</span>
-            <AnimatePresence mode="wait">
-              {copied ? (
-                <motion.span
-                  key="check"
-                  initial={{ scale: 0.5, opacity: 0 }}
-                  animate={{ scale: 1, opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  className="text-[10px] font-semibold uppercase tracking-widest text-(--color-accent)"
-                >
-                  Copied
-                </motion.span>
-              ) : (
-                <motion.span
-                  key="icon"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  className="text-[10px] text-muted opacity-0 transition-opacity group-hover:opacity-100"
-                >
-                  click to copy
-                </motion.span>
-              )}
-            </AnimatePresence>
+            <span className="pointer-events-none absolute left-full top-1/2 ml-2 -translate-y-1/2">
+              <AnimatePresence mode="wait">
+                {copied ? (
+                  <motion.span
+                    key="check"
+                    initial={{ scale: 0.5, opacity: 0 }}
+                    animate={{ scale: 1, opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.3 }}
+                    className="whitespace-nowrap text-[10px] font-semibold uppercase tracking-widest text-accent"
+                  >
+                    Copied
+                  </motion.span>
+                ) : (
+                  <motion.span
+                    key="icon"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    className="whitespace-nowrap text-[10px] text-muted opacity-0 transition-opacity group-hover:opacity-100"
+                  >
+                    click to copy
+                  </motion.span>
+                )}
+              </AnimatePresence>
+            </span>
           </button>
           <p>Gujarat, India</p>
         </div>

@@ -90,7 +90,7 @@ export function TestimonialsSection({ testimonials }: TestimonialsSectionProps) 
       className="space-y-7"
     >
       <div className="space-y-3">
-        <p className="text-xs font-semibold uppercase tracking-[0.16em] text-(--color-text-muted)">
+        <p className="text-xs font-semibold uppercase tracking-[0.16em] text-muted">
           Social Proof
         </p>
         <h2 className="font-display text-[clamp(3rem,8vw,6rem)] font-extrabold leading-[0.9] tracking-[-0.04em]">
@@ -109,13 +109,13 @@ export function TestimonialsSection({ testimonials }: TestimonialsSectionProps) 
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
               transition={{ duration: 0.35, ease: "easeOut", delay: index * 0.1 }}
-              className="min-w-[84%] space-y-4 border border-(--color-border) bg-(--color-surface) p-6"
+              className="min-w-[84%] space-y-4 border border-border bg-(--color-surface) p-6"
             >
               <div className="flex items-start gap-2">
                 <span className="font-display text-4xl leading-none text-(--color-accent)" aria-hidden="true">
                   "
                 </span>
-                <p className="pt-1 text-sm leading-7 text-(--color-text-muted)">{testimonial.quote}</p>
+                <p className="pt-1 text-sm leading-7 text-muted">{testimonial.quote}</p>
               </div>
 
               <div className="flex items-center gap-3">
@@ -161,13 +161,13 @@ export function TestimonialsSection({ testimonials }: TestimonialsSectionProps) 
                 initial={{ opacity: 0, y: 20 }}
                 animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                 transition={{ duration: 0.4, ease: "easeOut", delay: index * 0.1 }}
-                className="min-w-[340px] space-y-4 border border-(--color-border) bg-(--color-surface) p-6"
+                className="min-w-85 space-y-4 border border-border bg-(--color-surface) p-6"
               >
                 <div className="flex items-start gap-2">
                   <span className="font-display text-4xl leading-none text-(--color-accent)" aria-hidden="true">
                     "
                   </span>
-                  <p className="pt-1 text-sm leading-7 text-(--color-text-muted)">{testimonial.quote}</p>
+                  <p className="pt-1 text-sm leading-7 text-muted">{testimonial.quote}</p>
                 </div>
 
                 <div className="flex items-center gap-3">
@@ -196,9 +196,9 @@ export function TestimonialsSection({ testimonials }: TestimonialsSectionProps) 
             ))}
           </motion.div>
 
-          <div className="mt-4 h-[2px] w-full bg-(--color-border)">
+          <div className="mt-4 h-0.5 w-full bg-border">
             <motion.div
-              className="h-[2px] w-full origin-left bg-foreground"
+              className="h-0.5 w-full origin-left bg-foreground"
               style={{ scaleX: progressScale }}
             />
           </div>

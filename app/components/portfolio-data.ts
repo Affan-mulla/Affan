@@ -24,7 +24,7 @@ export type ExperienceItem = {
 
 export type ServiceTier = {
   name: string;
-  price: string;
+  priceUSD: number;
   description: string;
   deliverables: string[];
   featured?: boolean;
@@ -93,7 +93,7 @@ export const caseStudies: CaseStudy[] = [
 export const serviceTiers: ServiceTier[] = [
   {
     name: "Starter",
-    price: "from £500",
+    priceUSD: 620,
     description: "Perfect for freelancers who need a first serious portfolio",
     deliverables: [
       "Single-page portfolio",
@@ -107,7 +107,7 @@ export const serviceTiers: ServiceTier[] = [
   },
   {
     name: "Growth",
-    price: "from £1,200",
+    priceUSD: 1550,
     description: "For established freelancers ready to attract higher-budget clients",
     deliverables: [
       "Multi-page portfolio",
@@ -123,7 +123,7 @@ export const serviceTiers: ServiceTier[] = [
   },
   {
     name: "Premium",
-    price: "from £2,000+",
+    priceUSD: 2500,
     description: "Full brand + web presence for agencies and serious professionals",
     deliverables: [
       "Custom design system",

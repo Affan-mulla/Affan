@@ -84,7 +84,7 @@ export function StatsSection() {
       viewport={{ once: true, amount: 0.2 }}
       transition={{ duration: 0.4 }}
     >
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-px bg-(--color-border)">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-px bg-border">
         {stats.map((item) => (
           <StatItem
             key={item.label}

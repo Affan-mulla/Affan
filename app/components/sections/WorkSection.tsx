@@ -49,7 +49,7 @@ export function WorkSection({ caseStudies, onCursorLabel }: WorkSectionProps) {
                     {project.index}
                   </p>
                   {project.status && (
-                    <span className="inline-flex rounded-full border border-[rgba(229,151,24,0.36)] bg-[rgba(229,151,24,0.1)] px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.1em] text-[rgb(156,101,17)]">
+                    <span className="inline-flex rounded-full border border-[rgba(229,151,24,0.36)] bg-[rgba(229,151,24,0.1)] px-3 py-1 text-[10px] font-semibold uppercase tracking-widest text-[rgb(156,101,17)]">
                       {project.status}
                     </span>
                   )}
@@ -106,7 +106,7 @@ export function WorkSection({ caseStudies, onCursorLabel }: WorkSectionProps) {
               </div>
 
               <div
-                className={`relative min-h-[260px] overflow-hidden md:min-h-full ${
+                className={`relative min-h-[200px] overflow-hidden md:min-h-full ${
                   isWip ? "opacity-70" : ""
                 }`}
               >

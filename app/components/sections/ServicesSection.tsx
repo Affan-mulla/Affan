@@ -1,28 +1,54 @@
 "use client";
 
-import { motion, useInView, useMotionValue, useTransform } from "framer-motion";
-import { useEffect, useRef, useState, type MouseEvent, type RefObject } from "react";
+import { motion, useInView } from "framer-motion";
+import { useRef } from "react";
 import { ContactCtaButton } from "../ContactCtaButton";
 import { serviceTiers } from "../portfolio-data";
 import Border from "../Border";
+import type { CurrencyInfo } from "../hooks/useCurrency";
+import { useCurrency } from "../hooks/useCurrency";
 
 type ServicesSectionProps = {
   onCursorLabel: (label: string) => void;
 };
 
+const packagePricesByCurrency: Record<
+  string,
+  { Starter: number; Growth: number; Premium: number }
+> = {
+  USD: { Starter: 500, Growth: 1200, Premium: 2000 },
+  GBP: { Starter: 500, Growth: 1200, Premium: 2000 },
+  INR: { Starter: 5000, Growth: 8000, Premium: 15000 },
+};
+
+function getPackagePriceLabel(
+  tierName: (typeof serviceTiers)[number]["name"],
+  currency: CurrencyInfo,
+): string {
+  const currencyPrices = packagePricesByCurrency[currency.code] ?? packagePricesByCurrency.USD;
+  const amount = currencyPrices[tierName as keyof typeof currencyPrices];
+  const formattedAmount = new Intl.NumberFormat(currency.locale, {
+    style: "currency",
+    currency: currency.code,
+    maximumFractionDigits: 0,
+  }).format(amount);
+
+  return tierName === "Premium" ? `${formattedAmount}+` : formattedAmount;
+}
+
 
 function ServiceCard({
   index,
-  isDesktop,
   isSectionInView,
   onCursorLabel,
   tier,
+  currency,
 }: {
   index: number;
-  isDesktop: boolean;
   isSectionInView: boolean;
   onCursorLabel: (label: string) => void;
   tier: (typeof serviceTiers)[number];
+  currency: ReturnType<typeof useCurrency>;
 }) {
   const cardRef = useRef<HTMLElement | null>(null);
   return (
@@ -49,7 +75,14 @@ function ServiceCard({
           ) : null}
           <h3 className="text-2xl font-bold tracking-tight">{tier.name}</h3>
           <p className="text-sm font-semibold uppercase tracking-[0.08em] text-muted">
-            {tier.price}
+            {currency.isLoading ? (
+              <>
+                <span className="block h-4 w-16 animate-pulse rounded bg-border" aria-hidden="true" />
+                <span className="sr-only">Loading price</span>
+              </>
+            ) : (
+              getPackagePriceLabel(tier.name, currency)
+            )}
           </p>
           <p className="text-sm leading-7 text-muted">{tier.description}</p>
         </div>
@@ -80,15 +113,7 @@ function ServiceCard({
 export function ServicesSection({ onCursorLabel }: ServicesSectionProps) {
   const sectionRef = useRef<HTMLElement | null>(null);
   const isSectionInView = useInView(sectionRef, { once: true, amount: 0.2 });
-  const [isDesktop, setIsDesktop] = useState(false);
-
-  useEffect(() => {
-    const update = () => setIsDesktop(window.innerWidth >= 768);
-    update();
-    window.addEventListener("resize", update);
-
-    return () => window.removeEventListener("resize", update);
-  }, []);
+  const currency = useCurrency();
 
   return (
     <motion.section
@@ -114,10 +139,10 @@ export function ServicesSection({ onCursorLabel }: ServicesSectionProps) {
           <ServiceCard
             key={tier.name}
             index={index}
-            isDesktop={isDesktop}
             isSectionInView={isSectionInView}
             onCursorLabel={onCursorLabel}
             tier={tier}
+            currency={currency}
           />
         ))}
       </div>

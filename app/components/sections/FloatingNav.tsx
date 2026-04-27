@@ -32,7 +32,7 @@ export function FloatingNav({
   return (
     <div className="pointer-events-none fixed inset-x-0 top-0 z-50 px-4 pt-4 sm:px-6">
       <motion.nav
-        className="pointer-events-auto w-full flex items-center justify-between gap-3 rounded-full border border-(--color-border) bg-(--color-surface)/92 px-4 py-1 shadow-[0_4px_24px_rgba(0,0,0,0.08)] backdrop-blur-md"
+        className="pointer-events-auto w-full flex items-center justify-between gap-3 rounded-full border border-border bg-(--color-surface)/92 px-4 py-1 shadow-[0_4px_24px_rgba(0,0,0,0.08)] backdrop-blur-md"
         animate={{
           maxWidth: navCollapsed ? 920 : "none",
           paddingLeft: navCollapsed ? 14 : 22,
@@ -88,10 +88,11 @@ export function FloatingNav({
             type="button"
             onClick={onThemeToggle}
             onMouseEnter={() => onCursorLabel("Theme")}
-            className="inline-flex items-center gap-1.5 rounded-full border border-(--color-border) px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.08em] hover:bg-foreground hover:text-background"
+            aria-label={`Switch to ${isDark ? "light" : "dark"} mode`}
+            className="inline-flex items-center gap-1.5 rounded-full border border-border px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.08em] hover:bg-foreground hover:text-background"
           >
            <span className="mr-1 text-[15px]">◑ </span>
-            {isDark ? "Dark" : "Light"}
+            {isDark ? "Light" : "Dark"}
           </button>
           <ContactCtaButton
             href="#contact"

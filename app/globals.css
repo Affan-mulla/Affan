@@ -53,6 +53,7 @@ html[data-theme="dark"] {
   --font-display: var(--font-syne);
   --color-muted: var(--color-text-muted);
   --color-border: var(--color-border);
+  --color-accent: var(--color-accent);
 
 }
 
@@ -133,6 +134,7 @@ textarea {
   border-radius: 999px;
   background: var(--color-accent);
   box-shadow: 0 0 0 2px color-mix(in srgb, var(--color-accent) 20%, transparent);
+  transition: opacity 150ms ease;
 }
 
 .cursor-pill {
@@ -149,6 +151,7 @@ textarea {
   text-transform: uppercase;
   white-space: nowrap;
   box-shadow: 0 0 30px 2px var(--color-border);
+  will-change: transform;
 }
 
 @media (pointer: fine) {

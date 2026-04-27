@@ -69,7 +69,7 @@ function FaqRow({
       initial={{ opacity: 0, x: -12 }}
       animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -12 }}
       transition={{ duration: 0.4, ease: "easeOut", delay: index * 0.06 }}
-      className="border-b border-(--color-border)"
+      className="border-b border-border"
     >
       <button
         type="button"
@@ -81,7 +81,7 @@ function FaqRow({
         <motion.div
           animate={{ rotate: isOpen ? 45 : 0 }}
           transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
-          className="flex-shrink-0"
+          className="shrink-0"
         >
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
             <path d="M8 2V14M2 8H14" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
@@ -102,7 +102,7 @@ function FaqRow({
             }}
             className="overflow-hidden"
           >
-            <p className="pb-4 text-sm leading-7 text-(--color-text-muted)">{answer}</p>
+            <p className="pb-4 text-sm leading-7 text-muted">{answer}</p>
           </motion.div>
         ) : null}
       </AnimatePresence>
@@ -124,7 +124,7 @@ export function FaqSection() {
       className="space-y-7"
     >
       <div className="space-y-3">
-        <p className="text-xs font-semibold uppercase tracking-[0.16em] text-(--color-text-muted)">
+        <p className="text-xs font-semibold uppercase tracking-[0.16em] text-muted">
           FAQ
         </p>
         <h2 className="font-display text-[clamp(3rem,8vw,6rem)] font-extrabold leading-[0.9] tracking-[-0.04em]">

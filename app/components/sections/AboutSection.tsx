@@ -29,10 +29,10 @@ export function AboutSection({
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.2 }}
       transition={{ duration: 0.4 }}
-      className="space-y-6 border-y border-(--color-border) py-10"
+      className="space-y-6 border-y border-border py-10"
     >
       <div className="space-y-3">
-        <p className="text-xs font-semibold uppercase tracking-[0.16em] text-(--color-text-muted)">
+        <p className="text-xs font-semibold uppercase tracking-[0.16em] text-muted">
           My Story
         </p>
         <h2 className="font-display text-[clamp(3rem,8vw,6rem)] font-extrabold leading-[0.9] tracking-[-0.04em]">
@@ -64,14 +64,14 @@ export function AboutSection({
             <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-muted">
               Experience
             </p>
-            <div className="divide-y divide-(--color-border)">
+            <div className="divide-y divide-border">
               {experienceList.map((item) => (
                 <div key={item.role} className="grid gap-2 py-3 sm:grid-cols-[1fr_auto]">
                   <div>
                     <p className="text-sm font-semibold sm:text-base">{item.role}</p>
-                    <p className="text-xs text-(--color-text-muted)">{item.place}</p>
+                    <p className="text-xs text-muted">{item.place}</p>
                   </div>
-                  <p className="text-xs font-semibold uppercase tracking-[0.08em] text-(--color-text-muted)">
+                  <p className="text-xs font-semibold uppercase tracking-[0.08em] text-muted">
                     {item.period}
                   </p>
                 </div>
@@ -80,14 +80,14 @@ export function AboutSection({
           </div>
 
           <div className="space-y-3">
-            <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-(--color-text-muted)">
+            <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-muted">
               Skills
             </p>
             <div className="flex flex-wrap gap-2">
               {skillPills.map((skill) => (
                 <span
                   key={skill}
-                  className="rounded-full border border-(--color-border) bg-(--color-surface) px-3 py-1 text-[11px] font-medium text-(--color-text-muted)"
+                  className="rounded-full border border-border bg-(--color-surface) px-3 py-1 text-[11px] font-medium text-muted"
                 >
                   {skill}
                 </span>

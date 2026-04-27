@@ -71,7 +71,7 @@ export function HeroSection({
       variants={containerVariants}
       initial="hidden"
       animate="show"
-      className="relative grid min-h-[82svh] gap-10 border-b border-(--color-border) pb-8 pt-28 md:grid-cols-[1.18fr_0.82fr] md:gap-14 md:pt-36"
+      className="relative grid min-h-[82svh] gap-10 border-b border-border pb-8 pt-28 md:grid-cols-[1.18fr_0.82fr] md:gap-14 md:pt-36"
     >
       <address className="sr-only not-italic">
         Affan Mulla, Freelance Product Designer, Gujarat, India. Email: affanmulla077@gmail.com
@@ -94,7 +94,7 @@ export function HeroSection({
       )} */}
 
       <div className="space-y-6">
-        <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-(--color-text-muted)">
+        <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-muted">
           Product Designer & Frontend Dev — Est. 2023
         </p>
         <h1
@@ -162,7 +162,7 @@ export function HeroSection({
           initial={{ opacity: 0, x: 20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1], delay: 0.8 }}
-          className="inline-flex rounded-full border border-border px-4 py-2 text-xs font-semibold uppercase tracking-[0.12em] text-(--color-text-muted)"
+          className="inline-flex rounded-full border border-border px-4 py-2 text-xs font-semibold uppercase tracking-[0.12em] text-muted"
         >
           Gujarat, India
         </motion.span>
@@ -170,7 +170,7 @@ export function HeroSection({
           initial={{ opacity: 0, x: 20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1], delay: 0.9 }}
-          className="inline-flex rounded-full border border-border px-4 py-2 text-xs font-semibold uppercase tracking-[0.12em] text-(--color-text-muted)"
+          className="inline-flex rounded-full border border-border px-4 py-2 text-xs font-semibold uppercase tracking-[0.12em] text-muted"
         >
           SEO + Motion + UI Engineering
         </motion.span>
@@ -178,7 +178,7 @@ export function HeroSection({
 
       <motion.div
         aria-hidden="true"
-        className="absolute top-26 right-0 hidden flex-col items-center gap-3 md:flex"
+        className="absolute top-28 right-0 hidden flex-col items-center gap-3 md:flex"
         animate={{ y: [0, 4, 0] }}
         transition={{ duration: 2.4, repeat: Infinity, ease: "easeInOut" }}
       >

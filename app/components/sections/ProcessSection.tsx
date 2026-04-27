@@ -1,9 +1,12 @@
 "use client";
 
-import { AnimatePresence, motion } from "framer-motion";
-import { useEffect, useState } from "react";
-import { getWrapperHeight, useScrollProgress } from "@/app/components/hooks/useScrollProgress";
-import ProcessLine from "./ProcessLine";
+import {
+  motion,
+  useMotionValueEvent,
+  useReducedMotion,
+  useScroll,
+} from "framer-motion";
+import { useRef, useState } from "react";
 
 const steps = [
   {
@@ -48,129 +51,35 @@ const steps = [
   },
 ];
 
-type StepNumberProps = {
-  number: string;
-  isActive: boolean;
-  isDone: boolean;
-  stepReveal: number;
-};
-
-function StepNumber({ number, isActive, isDone, stepReveal }: StepNumberProps) {
-  return (
-    <motion.div
-      animate={{
-        opacity: isActive ? 0.92 : isDone ? 0.46 : stepReveal > 0.2 ? 0.2 : 0.08,
-        y: isActive ? -2 : isDone || stepReveal > 0 ? 0 : 2,
-      }}
-      transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-      className="relative z-10 font-display font-extrabold leading-none tracking-tight select-none bg-background w-fit"
-      style={{ fontSize: "clamp(3rem, 6vw, 5rem)" }}
-    >
-      {number}
-    </motion.div>
-  );
-}
-
-type StepContentProps = {
-  isActive: boolean;
-  isDone: boolean;
-  step: typeof steps[0];
-  stepReveal: number;
-};
-
-function StepContent({ isActive, isDone, step, stepReveal }: StepContentProps) {
-  const contentOpacity = Math.max(0, (stepReveal - 0.3) / 0.7);
-
-  return (
-    <div
-      className="flex flex-col gap-2 overflow-hidden"
-      style={{ opacity: isActive ? 1 : isDone ? 0.82 : contentOpacity }}
-    >
-      <motion.p
-        className="text-[10px] font-semibold uppercase tracking-[0.14em] text-(--color-text-muted)"
-        animate={{
-          opacity: isDone ? 0.3 : isActive ? 0.5 : 0,
-          y: isDone || stepReveal > 0.3 ? 0 : 8,
-        }}
-        transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-      >
-        {step.week}
-      </motion.p>
-
-      <motion.p
-        animate={{
-          opacity: isDone ? 0.55 : isActive ? 1 : stepReveal > 0.2 ? 0.3 : 0,
-          y: isDone || stepReveal > 0.2 ? 0 : 12,
-        }}
-        transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1], delay: 0.05 }}
-        className="text-sm font-bold tracking-tight"
-      >
-        {step.name}
-      </motion.p>
-
-      <AnimatePresence>
-        {(isActive || isDone) && (
-          <motion.p
-            initial={{ opacity: 0, height: 0, y: 8 }}
-            animate={{ opacity: isActive ? 1 : 0.6, height: "auto", y: 0 }}
-            exit={{ opacity: 0, height: 0, y: 4 }}
-            transition={{
-              duration: 0.35,
-              ease: [0.22, 1, 0.36, 1],
-              height: { duration: 0.3 },
-            }}
-            className="text-xs leading-relaxed text-(--color-text-muted) overflow-hidden"
-          >
-            {step.description}
-          </motion.p>
-        )}
-      </AnimatePresence>
-
-      <AnimatePresence>
-        {(isActive || isDone) && (
-          <motion.div
-            initial={{ opacity: 0, y: 6 }}
-            animate={{ opacity: isActive ? 1 : 0.6, y: 0 }}
-            exit={{ opacity: 0, y: 4 }}
-            transition={{ duration: 0.3, delay: 0.1 }}
-            className="inline-flex items-center gap-1.5 border border-(--color-border) px-2.5 py-1 w-fit"
-          >
-            <span className="w-1 h-1 rounded-full bg-(--color-accent) flex-shrink-0" />
-            <span className="text-[10px] font-medium text-(--color-text-muted)">{step.deliverable}</span>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </div>
-  );
-}
+type Step = (typeof steps)[number];
 
 export function ProcessSection() {
-  const TOTAL = 5;
-  const SCROLL_PER_STEP = 320;
-  const wrapperHeight = getWrapperHeight(TOTAL, SCROLL_PER_STEP);
+  const prefersReduced = useReducedMotion() ?? false;
+  const desktopScrollRef = useRef<HTMLElement | null>(null);
+  const [activeIndex, setActiveIndex] = useState(0);
+  const maxIndex = steps.length - 1;
 
-  const prefersReduced =
-    typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-  const { wrapperRef, progress, activeIndex, lineProgress, stepProgress, isPinned } = useScrollProgress({
-    totalSteps: TOTAL,
-    scrollPerStep: SCROLL_PER_STEP,
+  const { scrollYProgress } = useScroll({
+    target: desktopScrollRef,
+    offset: ["start start", "end end"],
   });
 
-  const [isMobile, setIsMobile] = useState(false);
+  useMotionValueEvent(scrollYProgress, "change", (latest) => {
+    const nextIndex = Math.min(
+      maxIndex,
+      Math.max(0, Math.floor(latest * steps.length)),
+    );
 
-  useEffect(() => {
-    const check = () => setIsMobile(window.innerWidth < 768);
-    check();
-    window.addEventListener("resize", check);
-    return () => window.removeEventListener("resize", check);
-  }, []);
+    setActiveIndex((prev) => (prev === nextIndex ? prev : nextIndex));
+  });
 
-  if (isMobile) {
-    return (
-      <section id="process" className="relative px-4 py-12 sm:px-8">
+  const desktopScrollHeight = `${steps.length * 90}vh`;
+
+  return (
+    <div id="process" className="relative">
+      <section className="relative px-4 py-12 sm:px-8 md:hidden">
         <div className="mb-8">
-          <p className="mb-3 text-xs font-semibold uppercase tracking-[0.16em] text-(--color-text-muted)">
+          <p className="mb-3 text-xs font-semibold uppercase tracking-[0.16em] text-muted">
             My Process
           </p>
           <h2 className="font-display text-[clamp(3rem,8vw,6rem)] font-extrabold leading-[0.9] tracking-[-0.04em]">
@@ -178,82 +87,37 @@ export function ProcessSection() {
           </h2>
         </div>
 
-        <div className="relative ml-2 border-l border-(--color-border) pl-6">
-          <div className="space-y-8">
+        <div className="relative border-l border-border pl-8">
+          <div className="space-y-6">
             {steps.map((step) => (
               <article key={step.number} className="relative space-y-2">
-                <span className="absolute -left-[1.78rem] top-2 h-2 w-2 rounded-full bg-(--color-foreground)" />
-                <p className="font-display text-4xl font-extrabold leading-none tracking-tight text-(--color-border)">
+                <span className="absolute left-[-2.07rem] top-1.5 h-2 w-2 rounded-full bg-(--color-foreground)" />
+                <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-(--color-accent)">
                   {step.number}
                 </p>
-                <p className="text-[10px] font-semibold uppercase tracking-[0.14em] text-(--color-text-muted)">
-                  {step.week}
+                <p className="text-base font-bold tracking-tight">
+                  {step.name}
                 </p>
-                <p className="text-sm font-bold tracking-tight">{step.name}</p>
-                <p className="text-xs leading-relaxed text-(--color-text-muted)">{step.description}</p>
-                <div className="inline-flex w-fit items-center gap-1.5 border border-(--color-border) px-2.5 py-1">
-                  <span className="h-1 w-1 flex-shrink-0 rounded-full bg-(--color-accent)" />
-                  <span className="text-[10px] font-medium text-(--color-text-muted)">{step.deliverable}</span>
+                <p className="text-xs text-muted">{step.week}</p>
+                <p className="text-sm leading-relaxed text-muted">
+                  {step.description}
+                </p>
+                <div className="inline-flex w-fit items-center gap-1.5 border border-border px-2.5 py-1">
+                  <span className="h-1 w-1 shrink-0 rounded-full bg-(--color-accent)" />
+                  <span className="text-[10px] font-medium text-muted">
+                    {step.deliverable}
+                  </span>
                 </div>
               </article>
             ))}
           </div>
         </div>
       </section>
-    );
-  }
 
-  if (prefersReduced) {
-    return (
-      <section id="process" className="relative px-4 py-12 sm:px-8">
-        <div className="mb-8">
-          <p className="mb-3 text-xs font-semibold uppercase tracking-[0.16em] text-(--color-text-muted)">
-            My Process
-          </p>
-          <h2 className="font-display text-[clamp(3rem,8vw,6rem)] font-extrabold leading-[0.9] tracking-[-0.04em]">
-            How it works
-          </h2>
-        </div>
-
-        <div className="w-full">
-          <div className="mb-4 grid grid-cols-5 gap-6">
-            {steps.map((step) => (
-              <div
-                key={step.number}
-                className="font-display font-extrabold leading-none tracking-tight select-none"
-                style={{ fontSize: "clamp(3rem, 6vw, 5rem)", opacity: 1 }}
-              >
-                {step.number}
-              </div>
-            ))}
-          </div>
-
-          <div className="mt-6 grid grid-cols-5 gap-6">
-            {steps.map((step) => (
-              <div key={step.number} className="flex flex-col gap-2 overflow-hidden">
-                <p className="text-[10px] font-semibold uppercase tracking-[0.14em] text-(--color-text-muted)">
-                  {step.week}
-                </p>
-                <p className="text-sm font-bold tracking-tight">{step.name}</p>
-                <p className="text-xs leading-relaxed text-(--color-text-muted)">{step.description}</p>
-                <div className="inline-flex w-fit items-center gap-1.5 border border-(--color-border) px-2.5 py-1">
-                  <span className="h-1 w-1 flex-shrink-0 rounded-full bg-(--color-accent)" />
-                  <span className="text-[10px] font-medium text-(--color-text-muted)">{step.deliverable}</span>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-    );
-  }
-
-  return (
-    <div ref={wrapperRef} id="process" style={{ height: wrapperHeight }} className="relative">
-      <div className="sticky top-4 h-[90vh] flex flex-col overflow-hidden px-4 sm:px-8">
-        <div className="flex h-full flex-col pt-10 pb-12">
-          <div className="mb-8">
-            <p className="mb-3 text-xs font-semibold uppercase tracking-[0.16em] text-(--color-text-muted)">
+      {prefersReduced ? (
+        <section className="relative hidden w-full px-8 py-14 md:block">
+          <div className="mb-10">
+            <p className="mb-3 text-xs font-semibold uppercase tracking-[0.16em] text-muted">
               My Process
             </p>
             <h2 className="font-display text-[clamp(3rem,8vw,6rem)] font-extrabold leading-[0.9] tracking-[-0.04em]">
@@ -261,64 +125,130 @@ export function ProcessSection() {
             </h2>
           </div>
 
-          <div className="w-full">
-            <div className="relative mb-3 grid grid-cols-5 gap-6 py-2">
-              <div className="pointer-events-none absolute inset-x-0 top-1/2 z-0 -translate-y-1/2">
-                <ProcessLine
-                  lineProgress={lineProgress}
-                  totalSteps={TOTAL}
-                  activeIndex={activeIndex}
-                  stepProgress={stepProgress}
-                />
+          <div className="grid grid-cols-5 gap-4">
+            {steps.map((step) => (
+              <article key={step.number} className="space-y-2">
+                <p className="text-[clamp(2.4rem,4vw,3.5rem)] font-display font-extrabold leading-none tracking-tight text-muted/40">
+                  {step.number}
+                </p>
+                <p className="text-sm font-bold tracking-tight">{step.name}</p>
+                <p className="text-xs text-muted">{step.week}</p>
+                <p className="text-sm leading-relaxed text-muted">
+                  {step.description}
+                </p>
+                <div className="inline-flex w-fit items-center gap-1.5 border border-border px-2.5 py-1">
+                  <span className="h-1 w-1 shrink-0 rounded-full bg-(--color-accent)" />
+                  <span className="text-[10px] font-medium text-muted">
+                    {step.deliverable}
+                  </span>
+                </div>
+              </article>
+            ))}
+          </div>
+        </section>
+      ) : (
+        <section
+          ref={desktopScrollRef}
+          className="relative hidden md:block"
+          style={{ height: desktopScrollHeight }}
+        >
+          <div className="sticky top-0 flex h-fit flex-col overflow-hidden px-8 py-14">
+            <div className="mb-10">
+              <p className="mb-3 text-xs font-semibold uppercase tracking-[0.16em] text-muted">
+                My Process
+              </p>
+              <h2 className="font-display text-[clamp(3rem,8vw,6rem)] font-extrabold leading-[0.9] tracking-[-0.04em]">
+                How it works
+              </h2>
+            </div>
+
+            <div className="relative">
+              <div className="pointer-events-none absolute inset-x-30 top-9 h-px -translate-y-1/2 bg-border z-10" />
+              <motion.div
+                className="pointer-events-none absolute inset-x-30 top-9 h-px -translate-y-1/2 origin-left bg-accent z-10"
+                style={{ scaleX: scrollYProgress }}
+              />
+              {/* Step Indicators */}
+              <div className="relative grid grid-cols-5 gap-4 z-20">
+                {steps.map((step, index) => {
+                  const isActive = activeIndex === index;
+                  const isComplete = index < activeIndex;
+
+                  return (
+                    <div
+                      key={`${step.number}-indicator`}
+                      className="flex justify-center"
+                    >
+                      <motion.span
+                        animate={{
+                          // opacity: isActive ? 1 : isComplete ? 0.7 : 0.35,
+                          color: isActive
+                            ? "var(--color-foreground)"
+                            : isComplete
+                              ? "var(--color-foreground)/60"
+                              : "var(--color-muted)",
+                          scale: isActive ? 1 : 0.9,
+                        }}
+                        transition={{
+                          duration: 0.24,
+                          ease: [0.22, 1, 0.36, 1],
+                        }}
+                        className={`relative z-10 px-2 text-[clamp(2.4rem,4.2vw,4.6rem)] font-display font-extrabold leading-none tracking-tight bg-background ${
+                          isActive
+                            ? "text-foreground"
+                            : isComplete
+                              ? "text-foreground/60"
+                              : "text-muted"
+                        }`}
+                      >
+                        {step.number}
+                      </motion.span>
+                    </div>
+                  );
+                })}
               </div>
-
-              {steps.map((step, i) => (
-                <StepNumber
-                  key={step.number}
-                  number={step.number}
-                  isActive={activeIndex === i}
-                  isDone={i < activeIndex}
-                  stepReveal={stepProgress[i] ?? 0}
-                />
-              ))}
             </div>
 
-            <div className="mt-4 grid grid-cols-5 gap-6">
-              {steps.map((step, i) => (
-                <StepContent
-                  key={step.number}
-                  step={step}
-                  isActive={activeIndex === i}
-                  isDone={i < activeIndex}
-                  stepReveal={stepProgress[i] ?? 0}
-                />
-              ))}
+            {/* Article */}
+            <div className="mt-10 flex-1 overflow-hidden">
+              <div className="grid h-fit grid-cols-5 gap-4">
+                {steps.map((step, index) => {
+                  const isActive = activeIndex === index;
+                  const isComplete = index < activeIndex;
+
+                  return (
+                    <motion.article
+                      key={`${step.number}-panel`}
+                      animate={{
+                        opacity: isActive ? 1 : isComplete ? 0.8 : 0,
+                        y: isActive || isComplete ? 0 : 20,
+                      }}
+                      transition={{ duration: 0.32, ease: [0.22, 1, 0.36, 1] }}
+                      className="space-y-3"
+                    >
+                      <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-(--color-accent)">
+                        {step.week}
+                      </p>
+                      <h3 className="text-[clamp(1.15rem,1.8vw,1.6rem)] font-bold leading-tight tracking-tight">
+                        {step.name}
+                      </h3>
+                      <p className="text-sm leading-relaxed text-muted">
+                        {step.description}
+                      </p>
+                      <div className="inline-flex w-fit items-center gap-1.5 border border-border px-2.5 py-1">
+                        <span className="h-1 w-1 shrink-0 rounded-full bg-(--color-accent)" />
+                        <span className="text-[10px] font-medium text-muted">
+                          {step.deliverable}
+                        </span>
+                      </div>
+                    </motion.article>
+                  );
+                })}
+              </div>
             </div>
           </div>
-
-          <div
-            className="absolute bottom-4 left-4 flex items-center gap-3 sm:left-8"
-            data-pinned={isPinned ? "true" : "false"}
-          >
-            <span className="text-xs font-semibold uppercase tracking-widest text-(--color-text-muted)">
-              Step
-            </span>
-            <AnimatePresence mode="wait">
-              <motion.span
-                key={activeIndex}
-                initial={{ opacity: 0, y: -6 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: 6 }}
-                transition={{ duration: 0.2 }}
-                className="text-xs font-semibold uppercase tracking-widest"
-              >
-                {steps[activeIndex].number} - {steps[activeIndex].name}
-              </motion.span>
-            </AnimatePresence>
-            <span className="sr-only">Progress {Math.round(progress * 100)} percent</span>
-          </div>
-        </div>
-      </div>
+        </section>
+      )}
     </div>
   );
 }
