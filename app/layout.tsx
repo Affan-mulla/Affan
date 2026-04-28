@@ -16,29 +16,30 @@ const syne = Syne({
 
 export const metadata: Metadata = {
   title: {
-    default: "Affan Mulla | Freelance Product Designer",
+    default: "Affan Mulla | Websites for Local Businesses",
     template: "%s | Affan Mulla",
   },
   description:
-    "Portfolio of Affan Mulla, freelance product designer and front-end developer creating SEO-optimized, mobile-first websites with interactive motion.",
+    "I build professional websites, landing pages, and local SEO for cafes, restaurants, contractors, and service businesses worldwide. Based in Gujarat, working internationally.",
   keywords: [
+    "website designer for local business",
+    "small business website design",
+    "restaurant website design",
+    "local SEO service",
+    "landing page designer",
+    "affordable website design",
+    "Next.js developer",
     "Affan Mulla",
-    "freelance portfolio",
-    "product designer",
-    "frontend developer",
-    "instagram aff4n_7",
-    "x _aff4n_",
-    "seo portfolio website",
   ],
   alternates: {
-    canonical: "https://affanmulla.com",
+    canonical: "https://affan-mulla.vercel.app",
   },
   openGraph: {
-    title: "Affan Mulla | Freelance Product Designer",
+    title: "Affan Mulla | Websites for Local Businesses",
     description:
-      "SEO-focused, conversion-driven portfolio website by Affan Mulla for clients and collaborations.",
-    url: "https://affanmulla.com",
-    siteName: "Affan Mulla Portfolio",
+      "Professional websites and local SEO for cafes, restaurants, contractors, and service businesses. Fast delivery, honest pricing.",
+    url: "https://affan-mulla.vercel.app",
+    siteName: "Affan Mulla",
     type: "website",
   },
   robots: {

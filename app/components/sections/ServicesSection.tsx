@@ -12,28 +12,21 @@ type ServicesSectionProps = {
   onCursorLabel: (label: string) => void;
 };
 
-const packagePricesByCurrency: Record<
-  string,
-  { Starter: number; Growth: number; Premium: number }
-> = {
-  USD: { Starter: 500, Growth: 1200, Premium: 2000 },
-  GBP: { Starter: 500, Growth: 1200, Premium: 2000 },
-  INR: { Starter: 5000, Growth: 8000, Premium: 15000 },
+const PRICES: Record<"USD" | "GBP" | "INR", Record<string, string>> = {
+  USD: { Starter: "$499", Growth: "$1,199", Premium: "$2,199" },
+  GBP: { Starter: "£399", Growth: "£949", Premium: "£1,749" },
+  INR: { Starter: "₹15,000", Growth: "₹35,000", Premium: "₹65,000" },
 };
 
-function getPackagePriceLabel(
-  tierName: (typeof serviceTiers)[number]["name"],
+function getPriceLabel(
+  tierName: string,
   currency: CurrencyInfo,
+  isLoading: boolean,
 ): string {
-  const currencyPrices = packagePricesByCurrency[currency.code] ?? packagePricesByCurrency.USD;
-  const amount = currencyPrices[tierName as keyof typeof currencyPrices];
-  const formattedAmount = new Intl.NumberFormat(currency.locale, {
-    style: "currency",
-    currency: currency.code,
-    maximumFractionDigits: 0,
-  }).format(amount);
-
-  return tierName === "Premium" ? `${formattedAmount}+` : formattedAmount;
+  if (isLoading) return "Loading...";
+  const tierPrices = PRICES[currency.code];
+  const price = tierPrices?.[tierName] ?? PRICES.USD[tierName];
+  return tierName === "Premium" ? `${price}+` : price;
 }
 
 
@@ -75,14 +68,7 @@ function ServiceCard({
           ) : null}
           <h3 className="text-2xl font-bold tracking-tight">{tier.name}</h3>
           <p className="text-sm font-semibold uppercase tracking-[0.08em] text-muted">
-            {currency.isLoading ? (
-              <>
-                <span className="block h-4 w-16 animate-pulse rounded bg-border" aria-hidden="true" />
-                <span className="sr-only">Loading price</span>
-              </>
-            ) : (
-              getPackagePriceLabel(tier.name, currency)
-            )}
+            {getPriceLabel(tier.name, currency, currency.isLoading)}
           </p>
           <p className="text-sm leading-7 text-muted">{tier.description}</p>
         </div>
@@ -99,11 +85,14 @@ function ServiceCard({
         </ul>
 
         <ContactCtaButton
-          href="#contact"
-          label={tier.cta}
+          href="https://www.cal.eu/affan/15min?overlayCalendar=true"
+          label="Get Started"
           size="compact"
           cursorLabel="Contact"
           onCursorLabel={onCursorLabel}
+          target="_blank"
+          rel="noopener noreferrer"
+          ariaLabel="Book a free discovery call (opens in new tab)"
         />
       </div>
     </motion.article>

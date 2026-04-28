@@ -74,7 +74,7 @@ export function HeroSection({
       className="relative grid min-h-[82svh] gap-10 border-b border-border pb-8 pt-28 md:grid-cols-[1.18fr_0.82fr] md:gap-14 md:pt-36"
     >
       <address className="sr-only not-italic">
-        Affan Mulla, Freelance Product Designer, Gujarat, India. Email: affanmulla077@gmail.com
+        Affan Mulla, Web Designer and Developer for local businesses, Gujarat, India. Email: affanmulla077@gmail.com. Available for projects worldwide.
       </address>
 
       <FloatingNav
@@ -95,7 +95,7 @@ export function HeroSection({
 
       <div className="space-y-6">
         <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-muted">
-          Product Designer & Frontend Dev — Est. 2023
+          Web Designer & Developer — Est. 2023
         </p>
         <h1
           className="font-display text-[clamp(3rem,15vw,10rem)] font-extrabold leading-[0.86] tracking-tighter text-foreground"
@@ -143,8 +143,9 @@ export function HeroSection({
           transition={{ duration: 0.5, ease: "easeOut", delay: 0.6 }}
           className="max-w-md text-lg leading-9 text-muted"
         >
-          I design and build portfolio websites for freelancers and agency owners who want to charge more
-          and win better clients. Based in Gujarat — working worldwide.
+          I build websites and landing pages for local businesses that want to look
+          professional, get found on Google, and win more customers. Based in Gujarat —
+          working with businesses worldwide.
         </motion.p>
       </div>
 
@@ -172,7 +173,7 @@ export function HeroSection({
           transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1], delay: 0.9 }}
           className="inline-flex rounded-full border border-border px-4 py-2 text-xs font-semibold uppercase tracking-[0.12em] text-muted"
         >
-          SEO + Motion + UI Engineering
+          Websites · SEO · Landing Pages
         </motion.span>
       </div>
 

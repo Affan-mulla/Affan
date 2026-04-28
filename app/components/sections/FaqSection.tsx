@@ -5,39 +5,39 @@ import { useEffect, useRef, useState, type MutableRefObject } from "react";
 
 const faqs = [
   {
-    question: "Do you use templates?",
+    question: "What kinds of businesses do you work with?",
     answer:
-      "No. Every project is designed from scratch in Figma based on your positioning, audience, and goals. Templates are fast but they make you look like everyone else.",
+      "Cafes, restaurants, bakeries, salons, plumbers, contractors, clinics, law firms, real estate agents, and any local business that needs a professional website. If you serve customers in the real world, I can help you look the part online."
   },
   {
-    question: "How long does a project take?",
+    question: "How long does a website take?",
     answer:
-      "A single-page portfolio takes 7-10 days. A full multi-page site with case studies typically takes 14-21 days. I'll give you a specific timeline in our first call.",
+      "A starter 5-page site takes 7 days. A full multi-page site with SEO and booking systems typically takes 14–21 days. I'll give you an exact timeline on our first call."
   },
   {
-    question: "What do you need from me to get started?",
+    question: "Do I need to provide content and photos?",
     answer:
-      "A brief call (15 min), your existing content or rough notes, any brand assets you have, and examples of sites you like. I handle the rest.",
+      "If you have photos and text, great — I'll use them. If not, I can source professional stock photography and write placeholder copy based on your business. For best results, your own photos always perform better."
   },
   {
-    question: "Do you offer revisions?",
+    question: "Will my website show up on Google?",
     answer:
-      "Yes - 2 full revision rounds are included in every package. Major scope changes outside the brief are quoted separately.",
+      "Every site I build includes basic SEO setup: proper page titles, meta descriptions, Google-friendly structure, and fast load times. The Growth and Premium packages include full local SEO and Google Business Profile optimisation."
   },
   {
-    question: "Can you write the copy too?",
+    question: "Can customers book or order through the site?",
     answer:
-      "I can provide copy direction and structure, and write placeholder copy based on your inputs. For full professional copywriting, I'll recommend a copywriter I work with.",
+      "Yes. I can integrate booking systems (like Cal.com or Calendly), reservation forms, and inquiry forms into your site. E-commerce and online ordering is available in the Premium package."
   },
   {
-    question: "What happens after launch?",
+    question: "What do you need from me to start?",
     answer:
-      "All packages include 14 days of post-launch support for bug fixes and small tweaks. Extended support retainers are available.",
+      "A 15-minute call to understand your business, your existing brand assets (logo, colours if you have them), and any reference sites you like. I handle the rest."
   },
   {
-    question: "Do you work with international clients?",
+    question: "Do you work with businesses outside India?",
     answer:
-      "Yes. I work async-first with clients across UK, US, Europe, and the UAE. Time zones have never been an issue.",
+      "Yes — most of my clients are international. I work async-first with businesses across the UK, US, Canada, and the UAE. Time zones have never been an issue."
   },
 ];
 

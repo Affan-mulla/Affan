@@ -12,9 +12,9 @@ type AboutSectionProps = {
 };
 
 const aboutParagraphs = [
-  "I'm Affan Mulla, a product designer and frontend developer who helps freelancers and small agencies look credible enough to charge what they're worth.",
-  "Every project I take on has one job: make you the obvious choice for your ideal client. That means sharp positioning, a fast site, and motion that feels considered - not decorative.",
-  "If you're building your first serious portfolio or redesigning a client-facing site, I handle both design direction and full frontend execution in Next.js.",
+  "I'm Affan Mulla, a web designer and developer who builds websites that help local businesses look credible, get found on Google, and convert visitors into paying customers.",
+  "Whether you run a bakery in Toronto, a plumbing company in London, or a law firm in Mumbai — I build the online presence that matches the quality of your real-world work.",
+  "Every project includes design, development, and basic SEO setup. You get a fast, mobile-first site that represents your business properly — without the agency price tag.",
 ];
 
 export function AboutSection({
@@ -52,8 +52,8 @@ export function AboutSection({
             href="https://www.cal.eu/affan/15min?overlayCalendar=true"
             target="_blank"
             rel="noopener noreferrer"
-            aria-label="Book a 15 minute call on Cal.com (opens in a new tab)"
-            label="Book a Free Call"
+            ariaLabel="Book a free discovery call (opens in new tab)"
+            label="Book a Free Discovery Call"
             cursorLabel="Contact"
             onCursorLabel={onCursorLabel}
           />

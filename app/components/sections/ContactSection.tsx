@@ -359,8 +359,8 @@ function SocialLinkCard({
 export function ContactSection({ onCursorLabel }: ContactSectionProps) {
   const [activeSocial, setActiveSocial] = useState<string | null>(null);
   const [copied, setCopied] = useState(false);
-  const sayHiChars = "Say hi!".split("");
-  const letsTalkChars = "Let's talk?".split("");
+  const sayHiChars = "Work with".split("");
+  const letsTalkChars = "me?".split("");
 
   return (
     <motion.section
@@ -435,6 +435,7 @@ export function ContactSection({ onCursorLabel }: ContactSectionProps) {
               href="https://www.cal.eu/affan/15min?overlayCalendar=true"
               target="_blank"
               rel="noopener noreferrer"
+              ariaLabel="Book a free discovery call (opens in new tab)"
               label="Book a free call"
               cursorLabel="Book"
               onCursorLabel={onCursorLabel}
@@ -500,7 +501,7 @@ export function ContactSection({ onCursorLabel }: ContactSectionProps) {
       </div>
 
       <p className="pt-6 text-center text-sm text-muted">
-        {"\u00A9"} {new Date().getFullYear()} Affan Mulla - Freelance Product Designer
+        {"\u00A9"} {new Date().getFullYear()} Affan Mulla — Web Designer & Developer
       </p>
     </motion.section>
   );

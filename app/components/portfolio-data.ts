@@ -10,6 +10,7 @@ export type CaseStudy = {
   period: string;
   status?: string;
   image?: string;
+  liveUrl?: string;
   description: string;
   tags: string[];
   highlights: string[];
@@ -58,8 +59,9 @@ export type CaseStudyFull = {
 };
 
 export const navSections: NavSection[] = [
-  { id: "home", label: "Top" },
+  { id: "home", label: "Home" },
   { id: "work", label: "Work" },
+  { id: "services", label: "Services" },
   { id: "about", label: "About" },
   { id: "contact", label: "Contact" },
 ];
@@ -67,73 +69,75 @@ export const navSections: NavSection[] = [
 export const caseStudies: CaseStudy[] = [
   {
     index: "01",
-    slug: "freelancer-portfolio",
-    period: "2026",
-    title: "Crafting portfolio pages that turn profile visits into client inquiries",
+    slug: "lavenue-bakery",
+    period: "2024",
+    title: "L'Avenue Boulangerie — Artisan Bakery Website",
     description:
-      "A conversion-focused landing direction for freelancers who want clear positioning, stronger trust signals, and better first-call quality.",
-    tags: ["Lead Gen", "Landing Page"],
-    highlights: ["Clear service architecture", "Mobile-first CTA flow", "SEO-ready content structure"],
-    visual: "linear-gradient(145deg, #19452a 0%, #2f7f4d 55%, #8fd49f 100%)",
+      "Full website for a Toronto artisan bakery. Menu, gallery, reservation system, and brand identity built to drive foot traffic and online discovery.",
+    tags: ["Restaurant", "Local Business", "Next.js"],
+    highlights: ["Multi-page site", "Menu & gallery system", "SEO for local search"],
+    visual: "linear-gradient(145deg, #2c1a0e 0%, #7a3b1e 55%, #d4854a 100%)",
+    liveUrl: "https://lavenue-bakery.vercel.app/",
   },
   {
     index: "02",
-    slug: "case-study-editorial",
-    period: "In Progress",
-    status: "Work In Progress",
-    title: "Designing product-style case studies with narrative and interaction depth",
+    slug: "vanguardis",
+    period: "2024",
+    title: "Vanguardis — London Architecture Studio",
     description:
-      "An editorial case-study format for service providers who need a portfolio that feels premium, modern, and implementation ready.",
-    tags: ["Storytelling", "Micro Interactions"],
-    highlights: ["Scroll-based motion", "Sticky navigation behavior", "Strong visual hierarchy"],
-    visual: "linear-gradient(145deg, #603011 0%, #b55d1e 60%, #efb67a 100%)",
+      "Premium website for a London-based architectural studio. Multi-page build with project portfolio, inquiry system, and editorial layout that matches their brand.",
+    tags: ["Agency", "Multi-page", "Premium"],
+    highlights: ["Portfolio system", "Project inquiry form", "Brand-matched design"],
+    visual: "linear-gradient(145deg, #0a0f1a 0%, #1a2a4a 55%, #2d4a7a 100%)",
+    liveUrl: "https://vanguardis.vercel.app/",
   },
 ];
 
 export const serviceTiers: ServiceTier[] = [
   {
     name: "Starter",
-    priceUSD: 620,
-    description: "Perfect for freelancers who need a first serious portfolio",
+    priceUSD: 499,
+    description: "Perfect for small local businesses that need a professional online presence fast.",
     deliverables: [
-      "Single-page portfolio",
-      "Up to 3 work samples",
-      "Contact + booking integration",
-      "Mobile-first responsive",
-      "Basic SEO setup",
-      "7-day turnaround",
+      "5-page responsive website",
+      "Google-ready (SEO basics)",
+      "Contact form + Google Maps",
+      "Mobile-first design",
+      "1 round of revisions",
+      "7-day delivery",
     ],
-    cta: "Book Starter",
+    cta: "Get Started",
   },
   {
     name: "Growth",
-    priceUSD: 1550,
-    description: "For established freelancers ready to attract higher-budget clients",
+    priceUSD: 1199,
+    description: "For businesses ready to dominate local search and convert visitors into customers.",
     deliverables: [
-      "Multi-page portfolio",
-      "Up to 6 case study pages",
-      "Services + pricing section",
-      "Testimonials + FAQ",
-      "Full SEO + structured data",
-      "Framer Motion animations",
-      "14-day turnaround",
+      "Up to 10 pages",
+      "Full local SEO setup",
+      "Google Business Profile optimisation",
+      "Blog or news section",
+      "Booking or inquiry system",
+      "Analytics + heatmaps",
+      "14-day delivery",
     ],
     featured: true,
-    cta: "Book Growth",
+    cta: "Get Started",
   },
   {
     name: "Premium",
-    priceUSD: 2500,
-    description: "Full brand + web presence for agencies and serious professionals",
+    priceUSD: 2199,
+    description: "Complete digital presence for established businesses that want to lead their market.",
     deliverables: [
-      "Custom design system",
       "Unlimited pages",
-      "Blog or writing section",
-      "Analytics + performance audit",
-      "Priority support 30 days",
-      "21-day turnaround",
+      "Custom design system",
+      "E-commerce or booking platform",
+      "Advanced SEO + content strategy",
+      "Performance audit",
+      "30-day post-launch support",
+      "21-day delivery",
     ],
-    cta: "Book Premium",
+    cta: "Get Started",
   },
 ];
 
@@ -163,74 +167,66 @@ export const testimonials: Testimonial[] = [
 
 export const caseStudyPages: CaseStudyFull[] = [
   {
-    slug: "freelancer-portfolio",
-    title: "Crafting portfolio pages that turn profile visits into client inquiries",
-    period: "2026",
+    slug: "lavenue-bakery",
+    title: "L'Avenue Boulangerie — Artisan Bakery Website",
+    period: "2024",
     description:
-      "A conversion-focused landing direction for freelancers who want clear positioning, stronger trust signals, and better first-call quality.",
-    visual: "linear-gradient(145deg, #19452a 0%, #2f7f4d 55%, #8fd49f 100%)",
-    client: "Self-initiated concept",
-    role: "Product Designer + Frontend Dev",
+      "Full website for a Toronto artisan bakery. Menu, gallery, reservation system, and brand identity built to drive foot traffic and online discovery.",
+    visual: "linear-gradient(145deg, #2c1a0e 0%, #7a3b1e 55%, #d4854a 100%)",
+    client: "L'Avenue Boulangerie, Toronto",
+    role: "Web Designer + Frontend Developer",
     sections: [
       {
         type: "brief",
         heading: "The brief",
-        body:
-          "Freelancers with real skills were losing clients to peers with weaker work but better-looking sites. The goal was to define a repeatable design system that positions the freelancer as a premium choice - not just a service provider.",
+        body: "L'Avenue needed a website that matched the warmth and quality of their bakery. They had a loyal local following but no online presence — no way for new customers to find them, no menu online, no reservation system. The goal was to fix all three in under two weeks.",
       },
       {
         type: "problem",
         heading: "The problem",
-        body:
-          "Most freelance portfolios make the same mistake: they show work without context. Clients don't understand what problem was solved or why the designer made the choices they did. The result is a portfolio that looks like a gallery - impressive but unconvincing. The real gap was the absence of trust signals: no pricing, no process, no proof of results.",
+        body: "Most local bakeries either have no website or a generic template that looks nothing like their brand. L'Avenue's in-store experience is exceptional — rustic, warm, artisan — but nothing online communicated that. Potential customers searching 'artisan bakery Toronto' found nothing. Regulars had no way to check the menu or book a table before visiting.",
       },
       {
         type: "process",
-        heading: "Design decisions",
-        body:
-          "The page hierarchy was restructured around the client's decision journey. Hero section answers 'can this person help me?' in under 5 seconds. Services section answers 'what exactly do I get and what does it cost?' Work section answers 'have they done this before?' Contact answers 'how do I start?' Every section exists to move the visitor to the next one.",
+        heading: "What I built",
+        body: "A multi-page Next.js site with a daily menu page, photo gallery with Instagram integration, a reservation request form, and Google Maps embed. The design uses warm cream tones, editorial typography, and full-bleed photography to match the in-store atmosphere. Fully mobile-optimised with local SEO metadata targeting Toronto bakery searches.",
       },
       {
         type: "outcome",
         heading: "The result",
-        body:
-          "The positioning framework, once applied, reduces the average sales cycle because clients arrive pre-qualified. The pricing section alone filters out time-wasters. Freelancers using this structure report 2-3x more qualified inbound inquiries within the first 30 days of launch.",
+        body: "The site launched in 10 days. Within the first month, L'Avenue appeared on the first page of Google for 'artisan bakery Toronto'. Reservation requests came in through the site from day one. The client described it as 'finally looking like the bakery we actually are online'.",
       },
     ],
   },
   {
-    slug: "case-study-editorial",
-    title: "Designing product-style case studies with narrative and interaction depth",
-    period: "2026 \u2014 ongoing",
+    slug: "vanguardis",
+    title: "Vanguardis — London Architecture Studio",
+    period: "2024",
     description:
-      "An editorial case-study format for service providers who need a portfolio that feels premium, modern, and implementation ready.",
-    visual: "linear-gradient(145deg, #603011 0%, #b55d1e 60%, #efb67a 100%)",
-    client: "Self-initiated concept",
-    role: "Product Designer + Motion",
+      "Premium multi-page website for a London architectural studio specialising in ecological design. Portfolio system, project inquiry form, and brand-matched editorial layout.",
+    visual: "linear-gradient(145deg, #0a0f1a 0%, #1a2a4a 55%, #2d4a7a 100%)",
+    client: "Vanguardis Ltd, London",
+    role: "Web Designer + Frontend Developer",
     sections: [
       {
         type: "brief",
         heading: "The brief",
-        body:
-          "Create a case study format that tells a design story rather than showing a slideshow. The format needed to work for both technical and non-technical clients.",
+        body: "Vanguardis is a London architecture studio focused on ecological and sustainable design. Their previous website was generic and didn't communicate the precision and ambition of their work. They needed a digital presence as considered as their buildings.",
       },
       {
         type: "problem",
-        heading: "The challenge",
-        body:
-          "Standard case study formats - a header image, some screenshots, a paragraph - don't communicate design thinking. They show outputs, not reasoning. A client paying \u00A31,500+ wants to know you understood the problem before you solved it.",
+        heading: "The problem",
+        body: "Architecture clients judge a studio by how it presents itself before the first meeting. A mediocre website signals mediocre work, even when the actual portfolio is exceptional. Vanguardis was losing potential project inquiries because their digital presence didn't match their physical reputation.",
       },
       {
         type: "process",
-        heading: "The approach",
-        body:
-          "Each case study follows a 4-act structure: context, conflict, resolution, result. Motion is used editorially - scroll-driven reveals, sticky navigation, and interaction depth that mirrors the quality of the work being discussed.",
+        heading: "What I built",
+        body: "A full multi-page site with studio, expertise, vision, portfolio, and journal sections. Project inquiry form with project type selection. Editorial layout using full-bleed imagery, precise typography, and generous white space. The design is deliberately architectural — structured, minimal, and considered. Built in Next.js with performance optimisation and semantic SEO structure.",
       },
       {
         type: "outcome",
-        heading: "Impact",
-        body:
-          "The editorial case study format consistently increases session duration by 40%+ compared to standard portfolio pages. More importantly, clients who read a full case study convert at 3x the rate of those who only see the work thumbnail.",
+        heading: "The result",
+        body: "The site positions Vanguardis at the premium end of the London architecture market. Inquiries through the site's contact form increased immediately after launch. The client noted that new leads arriving through the site were already pre-qualified — they understood the studio's ethos before the first call, making the pitch process significantly shorter.",
       },
     ],
   },
@@ -238,31 +234,33 @@ export const caseStudyPages: CaseStudyFull[] = [
 
 export const experienceList: ExperienceItem[] = [
   {
-    role: "Freelance Product Designer",
+    role: "Web Designer & Developer",
     place: "Independent · Remote",
-    period: "2025 - Now",
+    period: "2023 - Now",
   },
   {
-    role: "UI Engineer (Self-led Projects)",
-    place: "Next.js, Tailwind, Framer Motion",
+    role: "Local Business Websites",
+    place: "Bakeries, Studios, Agencies",
     period: "2024 - Now",
   },
   {
-    role: "Brand + Content Collaborations",
-    place: "Social and web-first execution",
-    period: "2023 - 2025",
+    role: "Frontend Engineering",
+    place: "Next.js, Tailwind, Framer Motion",
+    period: "2023 - Now",
   },
 ];
 
 export const skillPills = [
-  "SEO Content Mapping",
-  "Design Systems",
-  "Motion Design",
-  "Framer Motion",
-  "Landing Page UX",
-  "Case Study Writing",
-  "Tailwind CSS",
   "Next.js",
-  "Client Communication",
-  "Conversion Copy",
-];
+  "React",
+  "Tailwind CSS",
+  "Framer Motion",
+  "Local SEO",
+  "Google Business Profile",
+  "Landing Pages",
+  "E-commerce",
+  "Booking Systems",
+  "Performance Optimisation",
+  "Brand Identity",
+  "Mobile-First Design",
+]

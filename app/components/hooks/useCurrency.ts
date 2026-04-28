@@ -4,86 +4,94 @@ import { useEffect, useState } from "react";
 
 export type CurrencyInfo = {
   symbol: string;
-  code: string;
+  code: "USD" | "GBP" | "INR";
   locale: string;
 };
 
-type CurrencyState = CurrencyInfo & {
-  isLoading: boolean;
-};
+type CurrencyState = CurrencyInfo & { isLoading: boolean };
 
-const USD_DEFAULT: CurrencyInfo = {
-  symbol: "$",
-  code: "USD",
-  locale: "en-US",
-};
+const USD: CurrencyInfo = { symbol: "$", code: "USD", locale: "en-US" };
+const GBP: CurrencyInfo = { symbol: "£", code: "GBP", locale: "en-GB" };
+const INR: CurrencyInfo = { symbol: "₹", code: "INR", locale: "en-IN" };
 
-export const conversionRates: Record<string, number> = {
-  USD: 1,
-  INR: 83,
-  GBP: 0.79,
-};
+const EUROPEAN_COUNTRIES = new Set([
+  "GB",
+  "IE",
+  "FR",
+  "DE",
+  "IT",
+  "ES",
+  "NL",
+  "BE",
+  "CH",
+  "AT",
+  "SE",
+  "NO",
+  "DK",
+  "FI",
+  "PT",
+  "PL",
+  "CZ",
+  "HU",
+  "RO",
+  "GR",
+  "HR",
+  "SK",
+  "SI",
+  "EE",
+  "LV",
+  "LT",
+  "BG",
+  "CY",
+  "LU",
+  "MT",
+]);
 
-function getCurrencyByCountry(countryCode?: string): CurrencyInfo {
-  switch (countryCode) {
-    case "IN":
-      return { symbol: "₹", code: "INR", locale: "en-IN" };
-    case "GB":
-      return { symbol: "£", code: "GBP", locale: "en-GB" };
-    default:
-      return USD_DEFAULT;
-  }
-}
-
-export function formatPrice(usdAmount: number, currency: CurrencyInfo): string {
-  const rate = conversionRates[currency.code] ?? 1;
-  const convertedAmount = usdAmount * rate;
-
-  return new Intl.NumberFormat(currency.locale, {
-    style: "currency",
-    currency: currency.code,
-    maximumFractionDigits: 0,
-  }).format(convertedAmount);
+function getCurrency(countryCode: string): CurrencyInfo {
+  if (countryCode === "IN") return INR;
+  if (EUROPEAN_COUNTRIES.has(countryCode)) return GBP;
+  return USD;
 }
 
 export function useCurrency(): CurrencyState {
-  const [currency, setCurrency] = useState<CurrencyInfo>(USD_DEFAULT);
-  const [isLoading, setIsLoading] = useState(true);
+  const [state, setState] = useState<CurrencyState>({ ...USD, isLoading: true });
 
   useEffect(() => {
-    let isMounted = true;
+    let cancelled = false;
 
-    const loadCurrency = async () => {
+    const detect = async () => {
       try {
-        const response = await fetch("https://ipapi.co/json/");
-        if (!response.ok) {
-          throw new Error("Unable to detect country");
-        }
-
-        const data = (await response.json()) as { country_code?: string };
-        if (isMounted) {
-          setCurrency(getCurrencyByCountry(data.country_code));
-        }
+        // Try ipapi.co first (free, reliable)
+        const res = await fetch("https://ipapi.co/json/", {
+          signal: AbortSignal.timeout(4000),
+        });
+        if (!res.ok) throw new Error("ipapi failed");
+        const data = (await res.json()) as { country_code?: string };
+        if (cancelled) return;
+        const currency = getCurrency(data.country_code ?? "US");
+        setState({ ...currency, isLoading: false });
       } catch {
-        if (isMounted) {
-          setCurrency(USD_DEFAULT);
-        }
-      } finally {
-        if (isMounted) {
-          setIsLoading(false);
+        // Fallback: try ip-api.com
+        try {
+          const res2 = await fetch("http://ip-api.com/json/?fields=countryCode", {
+            signal: AbortSignal.timeout(3000),
+          });
+          const data2 = (await res2.json()) as { countryCode?: string };
+          if (cancelled) return;
+          const currency = getCurrency(data2.countryCode ?? "US");
+          setState({ ...currency, isLoading: false });
+        } catch {
+          // Both failed — default to USD
+          if (!cancelled) setState({ ...USD, isLoading: false });
         }
       }
     };
 
-    void loadCurrency();
-
+    detect();
     return () => {
-      isMounted = false;
+      cancelled = true;
     };
   }, []);
 
-  return {
-    ...currency,
-    isLoading,
-  };
+  return state;
 }

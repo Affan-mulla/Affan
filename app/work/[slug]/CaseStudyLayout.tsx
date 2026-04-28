@@ -143,10 +143,13 @@ export function CaseStudyLayout({ study }: CaseStudyLayoutProps) {
         </div>
 
         <ContactCtaButton
-          href="/#contact"
+          href="https://www.cal.eu/affan/15min?overlayCalendar=true"
           label="Start your project"
           cursorLabel="Contact"
           size="compact"
+          target="_blank"
+          rel="noopener noreferrer"
+          ariaLabel="Book a free discovery call (opens in new tab)"
         />
       </motion.section>
     );

@@ -95,11 +95,14 @@ export function FloatingNav({
             {isDark ? "Light" : "Dark"}
           </button>
           <ContactCtaButton
-            href="#contact"
+            href="https://www.cal.eu/affan/15min?overlayCalendar=true"
             label="Let's Talk"
             cursorLabel="Contact"
             onCursorLabel={onCursorLabel}
             size="compact"
+            target="_blank"
+            rel="noopener noreferrer"
+            ariaLabel="Book a free discovery call (opens in new tab)"
             className="hidden sm:inline-flex"
           />
         </div>

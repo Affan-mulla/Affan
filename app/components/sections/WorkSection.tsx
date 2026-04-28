@@ -34,8 +34,6 @@ export function WorkSection({ caseStudies, onCursorLabel }: WorkSectionProps) {
 
       <div className="grid gap-4">
         {caseStudies.map((project) => {
-          const isWip = project.status === "Work In Progress";
-
           const article = (
             <motion.article
               initial="rest"
@@ -44,18 +42,8 @@ export function WorkSection({ caseStudies, onCursorLabel }: WorkSectionProps) {
             >
              <Border/>
               <div className="space-y-5 p-5 sm:p-7">
-                <div className="flex items-center justify-between gap-3">
-                  <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-muted">
-                    {project.index}
-                  </p>
-                  {project.status && (
-                    <span className="inline-flex rounded-full border border-[rgba(229,151,24,0.36)] bg-[rgba(229,151,24,0.1)] px-3 py-1 text-[10px] font-semibold uppercase tracking-widest text-[rgb(156,101,17)]">
-                      {project.status}
-                    </span>
-                  )}
-                </div>
-                <p className="text-xs font-semibold uppercase tracking-[0.12em] text-muted">
-                  Concept Project / {project.period}
+                <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-muted">
+                  {project.index} · {project.period}
                 </p>
                 <h3 className="max-w-xl text-3xl font-bold leading-tight tracking-tight">{project.title}</h3>
                 <p className="max-w-xl text-sm leading-7 text-muted">{project.description}</p>
@@ -78,14 +66,13 @@ export function WorkSection({ caseStudies, onCursorLabel }: WorkSectionProps) {
                     </p>
                   ))}
                 </div>
-
-                {isWip ? (
-                  <p className="mt-2 text-xs font-semibold uppercase tracking-widest text-muted">
-                    Coming soon
-                  </p>
-                ) : (
-                  <p className="group mt-2 flex items-center gap-1.5 text-xs font-semibold uppercase tracking-widest text-(--color-accent)">
-                    Read case study
+                <div className="mt-2 flex items-center gap-4 text-xs font-semibold uppercase tracking-widest">
+                  <Link
+                    href={`/work/${project.slug}`}
+                    onMouseEnter={() => onCursorLabel("Read")}
+                    className="group inline-flex items-center gap-1.5 text-(--color-accent)"
+                  >
+                    View case study →
                     <svg
                       viewBox="0 0 24 24"
                       fill="none"
@@ -101,14 +88,37 @@ export function WorkSection({ caseStudies, onCursorLabel }: WorkSectionProps) {
                         strokeLinejoin="round"
                       />
                     </svg>
-                  </p>
-                )}
+                  </Link>
+                  {project.liveUrl ? (
+                    <a
+                      href={project.liveUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="group inline-flex items-center gap-1.5 text-muted"
+                    >
+                      View Live Site
+                      <svg
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="h-3.5 w-3.5 transition-transform duration-200 group-hover:translate-x-1"
+                        aria-hidden="true"
+                      >
+                        <path
+                          d="M5 12H19M19 12L13 6M19 12L13 18"
+                          stroke="currentColor"
+                          strokeWidth="1.8"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                      </svg>
+                    </a>
+                  ) : null}
+                </div>
               </div>
 
               <div
-                className={`relative min-h-[200px] overflow-hidden md:min-h-full ${
-                  isWip ? "opacity-70" : ""
-                }`}
+                className="relative min-h-[200px] overflow-hidden md:min-h-full"
               >
                 {project.image ? (
                   <Image
@@ -125,20 +135,7 @@ export function WorkSection({ caseStudies, onCursorLabel }: WorkSectionProps) {
             </motion.article>
           );
 
-          if (isWip) {
-            return <div key={`${project.index}-${project.title}`}>{article}</div>;
-          }
-
-          return (
-            <Link
-              key={`${project.index}-${project.title}`}
-              href={`/work/${project.slug}`}
-              onMouseEnter={() => onCursorLabel("Read")}
-              className="block"
-            >
-              {article}
-            </Link>
-          );
+          return <div key={`${project.index}-${project.title}`}>{article}</div>;
         })}
       </div>
     </motion.section>

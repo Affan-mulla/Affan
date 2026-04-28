@@ -39,10 +39,10 @@ export default function Home() {
       "@context": "https://schema.org",
       "@type": "Person",
       name: "Affan Mulla",
-      jobTitle: "Freelance Product Designer & Front-End Developer",
-      description:
-        "Freelancer helping clients get more leads and better opportunities through SEO-ready portfolio websites and interactive product experiences.",
+      jobTitle: "Web Designer & Developer",
+      description: "Building websites and landing pages for local businesses internationally.",
       email: "mailto:affanmulla077@gmail.com",
+      url: "https://affan-mulla.vercel.app",
       sameAs: [
         "https://instagram.com/aff4n_7",
         "https://x.com/_aff4n_",
@@ -50,12 +50,10 @@ export default function Home() {
         "https://github.com/Affan-mulla",
       ],
       knowsAbout: [
-        "Portfolio UX",
-        "Web Design",
-        "Front-End Development",
-        "SEO Architecture",
-        "Interaction Design",
+        "Website Design", "Local SEO", "Landing Pages", 
+        "Next.js", "Small Business Websites", "E-commerce"
       ],
+      areaServed: ["IN", "GB", "US", "CA", "AE", "AU"],
     }),
     [],
   );

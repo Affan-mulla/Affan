@@ -1,18 +1,18 @@
 "use client";
 
 const items = [
-  "Figma",
+  "Websites",
+  "Landing Pages",
+  "Local SEO",
   "Next.js",
-  "Framer Motion",
+  "Restaurant Sites",
+  "Booking Systems",
+  "Google Business",
+  "E-commerce",
   "Tailwind CSS",
-  "TypeScript",
-  "React 19",
-  "Motion Design",
-  "SEO Architecture",
-  "Conversion Copy",
-  "Design Systems",
-  "Vercel",
-  "Node.js",
+  "Mobile-First",
+  "Framer Motion",
+  "Performance Optimisation",
 ];
 
 const loopItems = [...items, ...items];
