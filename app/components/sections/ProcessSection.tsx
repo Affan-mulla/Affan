@@ -82,7 +82,7 @@ export function ProcessSection() {
           <p className="mb-3 text-xs font-semibold uppercase tracking-[0.16em] text-muted">
             My Process
           </p>
-          <h2 className="font-display text-[clamp(3rem,8vw,6rem)] font-extrabold leading-[0.9] tracking-[-0.04em]">
+          <h2 className="font-display text-[clamp(2.2rem,8vw,6rem)] font-extrabold leading-[0.9] tracking-[-0.04em]">
             How it works
           </h2>
         </div>
@@ -90,7 +90,7 @@ export function ProcessSection() {
         <div className="relative pl-8 ">
           <div className="space-y-6">
             <span
-                  className="absolute h-215 left-0  w-px bg-border top-1 "
+                  className="absolute h-5/6 left-0  w-px bg-border top-1 "
                 />
             {steps.map((step) => (
               <article key={step.number} className="relative space-y-2">
@@ -124,7 +124,7 @@ export function ProcessSection() {
             <p className="mb-3 text-xs font-semibold uppercase tracking-[0.16em] text-muted">
               My Process
             </p>
-            <h2 className="font-display text-[clamp(3rem,8vw,6rem)] font-extrabold leading-[0.9] tracking-[-0.04em]">
+            <h2 className="font-display text-[clamp(2.2rem,8vw,6rem)] font-extrabold leading-[0.9] tracking-[-0.04em]">
               How it works
             </h2>
           </div>
@@ -161,7 +161,7 @@ export function ProcessSection() {
               <p className="mb-3 text-xs font-semibold uppercase tracking-[0.16em] text-muted">
                 My Process
               </p>
-              <h2 className="font-display text-[clamp(3rem,8vw,6rem)] font-extrabold leading-[0.9] tracking-[-0.04em]">
+              <h2 className="font-display text-[clamp(2.2rem,8vw,6rem)] font-extrabold leading-[0.9] tracking-[-0.04em]">
                 How it works
               </h2>
             </div>

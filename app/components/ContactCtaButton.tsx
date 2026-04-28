@@ -74,8 +74,8 @@ export function ContactCtaButton({
   target,
 }: ContactCtaButtonProps) {
   const sizeClasses = size === "compact"
-    ? "px-3 py-1.5 text-[11px]"
-    : "px-4 py-2 text-xs";
+    ? "px-2.5 py-1 text-[10px] sm:px-3 sm:py-1.5 sm:text-[11px]"
+    : "px-3 py-1.5 text-[10px] sm:px-4 sm:py-2 sm:text-xs";
 
   return (
     <motion.a

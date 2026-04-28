@@ -93,7 +93,7 @@ export function TestimonialsSection({ testimonials }: TestimonialsSectionProps) 
         <p className="text-xs font-semibold uppercase tracking-[0.16em] text-muted">
           Social Proof
         </p>
-        <h2 className="font-display sm:text-[clamp(3rem,8vw,6rem)] text-[clamp(2rem,4vw,3rem)] font-extrabold leading-[0.9] tracking-[-0.04em]">
+        <h2 className="font-display sm:text-[clamp(2.5rem,8vw,6rem)] text-[clamp(1.75rem,4vw,2.5rem)] font-extrabold leading-[0.9] tracking-[-0.04em]">
           What clients say
         </h2>
       </div>

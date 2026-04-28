@@ -35,17 +35,17 @@ export function AboutSection({
         <p className="text-xs font-semibold uppercase tracking-[0.16em] text-muted">
           My Story
         </p>
-        <h2 className="font-display text-[clamp(3rem,8vw,6rem)] font-extrabold leading-[0.9] tracking-[-0.04em]">
+        <h2 className="font-display text-[clamp(2.2rem,8vw,6rem)] font-extrabold leading-[0.9] tracking-[-0.04em]">
           About
         </h2>
       </div>
 
       <div className="grid gap-10 md:grid-cols-[1fr_1fr]  ">
-        <div className="space-y-6 text-[clamp(1.5rem,2vw,1.2rem)] leading-[1.4]">
+        <div className="space-y-6 text-[clamp(1rem,2vw,1.5rem)] leading-[1.4]">
           <ScrollHighlightText
             paragraphs={aboutParagraphs}
             className="space-y-6"
-            paragraphClassName="text-wrap  flex flex-wrap text-justify text-[clamp(1.2rem,2vw,1.2rem)] leading-[1.4]"
+            paragraphClassName="text-wrap  flex flex-wrap text-justify text-[clamp(1rem,2vw,1.5rem)] leading-[1.4]"
           />
 
           <ContactCtaButton

@@ -7,6 +7,7 @@ import type { NavSection } from "../portfolio-data";
 type FloatingNavProps = {
   activeSection: string;
   navCollapsed: boolean;
+  navHidden: boolean;
   navSections: NavSection[];
   onCursorLabel: (label: string) => void;
   onThemeToggle: () => void;
@@ -16,6 +17,7 @@ type FloatingNavProps = {
 export function FloatingNav({
   activeSection,
   navCollapsed,
+  navHidden,
   navSections,
   onCursorLabel,
   onThemeToggle,
@@ -39,7 +41,8 @@ export function FloatingNav({
           paddingRight: navCollapsed ? 14 : 22,
           paddingTop: navCollapsed ? 8 : 4,
           paddingBottom: navCollapsed ? 8 : 4,
-          y: navCollapsed ? 0 : 12,
+          y: navHidden ? -120 : navCollapsed ? 0 : 12,
+          opacity: navHidden ? 0.2 : 1,
           margin: navCollapsed ? "0 auto" : "0",
           backgroundColor: navCollapsed ? collapsedBackground : expandedBackground,
           boxShadow: navCollapsed
@@ -48,7 +51,7 @@ export function FloatingNav({
           borderColor: navCollapsed ? "var(--color-border)" : "rgba(0,0,0,0)",
           backdropFilter: navCollapsed ? "blur(16px)" : "blur(0px)",
         }}
-        transition={{ type: "spring", stiffness: 260, damping: 30, mass: 0.6, duration: 2 }}
+        transition={{ type: "spring", stiffness: 260, damping: 30, mass: 0.6, duration: 0.3 }}
         aria-label="Primary"
       >
         <a
@@ -91,8 +94,8 @@ export function FloatingNav({
             aria-label={`Switch to ${isDark ? "light" : "dark"} mode`}
             className="inline-flex items-center gap-1.5 rounded-full border border-border px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.08em] hover:bg-foreground hover:text-background"
           >
-           <span className="mr-1 text-[15px]">◑ </span>
-            {isDark ? "Light" : "Dark"}
+            <span className="text-[15px]">◑</span>
+            <span className="hidden sm:inline">{isDark ? "Light" : "Dark"}</span>
           </button>
           <ContactCtaButton
             href="https://www.cal.eu/affan/15min?overlayCalendar=true"

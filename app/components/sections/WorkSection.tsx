@@ -27,7 +27,7 @@ export function WorkSection({ caseStudies, onCursorLabel }: WorkSectionProps) {
         <p className="text-xs font-semibold uppercase tracking-[0.16em] text-muted">
           Selected Work
         </p>
-        <h2 className="font-display text-[clamp(3rem,8vw,6rem)] font-extrabold leading-[0.9] tracking-[-0.04em]">
+        <h2 className="font-display text-[clamp(2.2rem,8vw,6rem)] font-extrabold leading-[0.9] tracking-[-0.04em]">
           Work
         </h2>
       </div>

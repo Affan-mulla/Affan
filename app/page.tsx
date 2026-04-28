@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { AboutSection } from "@/app/components/sections/AboutSection";
 import { ContactSection } from "@/app/components/sections/ContactSection";
 import { FaqSection } from "@/app/components/sections/FaqSection";
@@ -27,6 +27,7 @@ export default function Home() {
   const [isTouch, setIsTouch] = useState(false);
   const [theme, setTheme] = useState<"light" | "dark">("light");
   const [themeInitialized, setThemeInitialized] = useState(false);
+  const [navHidden, setNavHidden] = useState(false);
   const [cursor, setCursor] = useState({
     x: -100,
     y: -100,
@@ -107,22 +108,26 @@ export default function Home() {
     window.localStorage.setItem("affan-theme", theme);
   }, [theme, themeInitialized]);
 
-  useEffect(() => {
-    const onScroll = () => {
-      const hero = document.getElementById("home");
+  const scrollStateRef = useRef(0);
 
-      if (!hero) {
-        return;
+  useEffect(() => {
+    const handleScroll = () => {
+      const hero = document.getElementById("home");
+      if (hero) {
+        setIsPastHeroThreshold(hero.getBoundingClientRect().top <= -96);
       }
 
-      // Collapse nav shortly after user starts scrolling through hero.
-      setIsPastHeroThreshold(hero.getBoundingClientRect().top <= -96);
+      const currentScroll = window.scrollY;
+      const isScrollingDown = currentScroll > scrollStateRef.current;
+      
+      // Hide if scrolling down and past 150px, show if scrolling up
+      setNavHidden(isScrollingDown && currentScroll > 150);
+      
+      scrollStateRef.current = currentScroll;
     };
 
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-
-    return () => window.removeEventListener("scroll", onScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   useEffect(() => {

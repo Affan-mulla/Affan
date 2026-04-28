@@ -127,7 +127,7 @@ export function FaqSection() {
         <p className="text-xs font-semibold uppercase tracking-[0.16em] text-muted">
           FAQ
         </p>
-        <h2 className="font-display sm:text-[clamp(3rem,8vw,6rem)] text-[clamp(2rem,4vw,3rem)] font-extrabold leading-[0.9] tracking-[-0.04em]">
+        <h2 className="font-display sm:text-[clamp(2.5rem,8vw,6rem)] text-[clamp(1.75rem,4vw,2.5rem)] font-extrabold leading-[0.9] tracking-[-0.04em]">
           Common questions
         </h2>
       </div>

@@ -98,7 +98,7 @@ export function HeroSection({
           Web Designer & Developer — Est. 2023
         </p>
         <h1
-          className="font-display text-[clamp(3rem,15vw,10rem)] font-extrabold leading-[0.86] tracking-tighter text-foreground"
+          className="font-display text-[clamp(1.75rem,15vw,10rem)] font-extrabold leading-[0.86] tracking-tighter text-foreground"
           onMouseMove={handleNameMouseMove}
           onMouseLeave={resetMagnet}
         >
