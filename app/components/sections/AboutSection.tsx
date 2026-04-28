@@ -45,7 +45,7 @@ export function AboutSection({
           <ScrollHighlightText
             paragraphs={aboutParagraphs}
             className="space-y-6"
-            paragraphClassName="text-wrap  flex flex-wrap"
+            paragraphClassName="text-wrap  flex flex-wrap text-justify text-[clamp(1.2rem,2vw,1.2rem)] leading-[1.4]"
           />
 
           <ContactCtaButton

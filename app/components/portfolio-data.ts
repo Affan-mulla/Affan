@@ -60,8 +60,8 @@ export type CaseStudyFull = {
 
 export const navSections: NavSection[] = [
   { id: "home", label: "Home" },
-  { id: "work", label: "Work" },
   { id: "services", label: "Services" },
+  { id: "work", label: "Work" },
   { id: "about", label: "About" },
   { id: "contact", label: "Contact" },
 ];
@@ -252,15 +252,15 @@ export const experienceList: ExperienceItem[] = [
 
 export const skillPills = [
   "Next.js",
-  "React",
   "Tailwind CSS",
   "Framer Motion",
   "Local SEO",
+  "React",
   "Google Business Profile",
   "Landing Pages",
+  "Performance Optimisation",
   "E-commerce",
   "Booking Systems",
-  "Performance Optimisation",
   "Brand Identity",
   "Mobile-First Design",
 ]

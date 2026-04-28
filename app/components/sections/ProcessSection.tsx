@@ -87,11 +87,15 @@ export function ProcessSection() {
           </h2>
         </div>
 
-        <div className="relative border-l border-border pl-8">
+        <div className="relative pl-8 ">
           <div className="space-y-6">
+            <span
+                  className="absolute h-215 left-0  w-px bg-border top-1 "
+                />
             {steps.map((step) => (
               <article key={step.number} className="relative space-y-2">
-                <span className="absolute left-[-2.07rem] top-1.5 h-2 w-2 rounded-full bg-(--color-foreground)" />
+                <span className="absolute left-[-2.21rem] top-1 h-2 w-2 rounded-full bg-(--color-foreground)" />
+                
                 <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-(--color-accent)">
                   {step.number}
                 </p>

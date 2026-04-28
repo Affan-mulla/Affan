@@ -81,9 +81,9 @@ function FaqRow({
         <motion.div
           animate={{ rotate: isOpen ? 45 : 0 }}
           transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
-          className="shrink-0"
+          className="shrink-0 text-muted"
         >
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
             <path d="M8 2V14M2 8H14" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
           </svg>
         </motion.div>
@@ -127,7 +127,7 @@ export function FaqSection() {
         <p className="text-xs font-semibold uppercase tracking-[0.16em] text-muted">
           FAQ
         </p>
-        <h2 className="font-display text-[clamp(3rem,8vw,6rem)] font-extrabold leading-[0.9] tracking-[-0.04em]">
+        <h2 className="font-display sm:text-[clamp(3rem,8vw,6rem)] text-[clamp(2rem,4vw,3rem)] font-extrabold leading-[0.9] tracking-[-0.04em]">
           Common questions
         </h2>
       </div>
