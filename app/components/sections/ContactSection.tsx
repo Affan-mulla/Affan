@@ -12,9 +12,7 @@ import { useCallback, useState, type ReactNode } from "react";
 import Image from "next/image";
 import { ContactCtaButton } from "../ContactCtaButton";
 
-type ContactSectionProps = {
-  onCursorLabel: (label: string) => void;
-};
+
 
 type SocialProfileCard = {
   id: "linkedin" | "instagram" | "twitter" | "github";
@@ -266,13 +264,11 @@ function SocialLinkCard({
   isActive,
   onActivate,
   onDeactivate,
-  onCursorLabel,
 }: {
   profile: SocialProfileCard;
   isActive: boolean;
   onActivate: () => void;
   onDeactivate: () => void;
-  onCursorLabel: (label: string) => void;
 }) {
   const [isHovered, setIsHovered] = useState(false);
   const rawX = useMotionValue(0);
@@ -297,7 +293,6 @@ function SocialLinkCard({
         target="_blank"
         rel="noreferrer"
         onMouseEnter={(event) => {
-          onCursorLabel(profile.cursorLabel);
           onActivate();
           setIsHovered(true);
           setCardPosition(event.clientX, event.clientY);
@@ -314,7 +309,6 @@ function SocialLinkCard({
           setIsHovered(false);
         }}
         onFocus={(event) => {
-          onCursorLabel(profile.cursorLabel);
           onActivate();
           setIsHovered(true);
           const rect = event.currentTarget.getBoundingClientRect();
@@ -356,7 +350,7 @@ function SocialLinkCard({
   );
 }
 
-export function ContactSection({ onCursorLabel }: ContactSectionProps) {
+export function ContactSection() {
   const [activeSocial, setActiveSocial] = useState<string | null>(null);
   const [copied, setCopied] = useState(false);
   const sayHiChars = "Work with".split("");
@@ -397,8 +391,6 @@ export function ContactSection({ onCursorLabel }: ContactSectionProps) {
             href="https://www.cal.eu/affan/15min?overlayCalendar=true"
             target="_blank"
             rel="noopener noreferrer"
-            onMouseEnter={() => onCursorLabel("Book Call")}
-            onFocus={() => onCursorLabel("Book Call")}
             className="group inline-flex items-center gap-2 rounded-sm transition-colors duration-300 hover:text-accent focus-visible:text-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2"
           >
             <span className="relative block">
@@ -438,7 +430,6 @@ export function ContactSection({ onCursorLabel }: ContactSectionProps) {
               ariaLabel="Book a free discovery call (opens in new tab)"
               label="Book a free call"
               cursorLabel="Book"
-              onCursorLabel={onCursorLabel}
               size="default"
             />
           </div>
@@ -494,7 +485,6 @@ export function ContactSection({ onCursorLabel }: ContactSectionProps) {
                   current === profile.id ? null : current,
                 )
               }
-              onCursorLabel={onCursorLabel}
             />
           ))}
         </div>

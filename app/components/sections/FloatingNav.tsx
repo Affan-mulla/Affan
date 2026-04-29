@@ -9,7 +9,6 @@ type FloatingNavProps = {
   navCollapsed: boolean;
   navHidden: boolean;
   navSections: NavSection[];
-  onCursorLabel: (label: string) => void;
   onThemeToggle: () => void;
   theme: "light" | "dark";
 };
@@ -19,7 +18,6 @@ export function FloatingNav({
   navCollapsed,
   navHidden,
   navSections,
-  onCursorLabel,
   onThemeToggle,
   theme,
 }: FloatingNavProps) {
@@ -41,10 +39,12 @@ export function FloatingNav({
           paddingRight: navCollapsed ? 14 : 22,
           paddingTop: navCollapsed ? 8 : 4,
           paddingBottom: navCollapsed ? 8 : 4,
-          y: navHidden ? -120 : navCollapsed ? 0 : 12,
-          opacity: navHidden ? 0.2 : 1,
+          y: navHidden ? -80 : navCollapsed ? 0 : 12,
+          opacity: navHidden ? 0 : 1,
           margin: navCollapsed ? "0 auto" : "0",
-          backgroundColor: navCollapsed ? collapsedBackground : expandedBackground,
+          backgroundColor: navCollapsed
+            ? collapsedBackground
+            : expandedBackground,
           boxShadow: navCollapsed
             ? "0 4px 24px rgba(0,0,0,0.08)"
             : "0 0 0 rgba(0,0,0,0)",
@@ -56,7 +56,6 @@ export function FloatingNav({
       >
         <a
           href="#home"
-          onMouseEnter={() => onCursorLabel("Home")}
           className="font-display text-base font-extrabold tracking-tight"
         >
           Aff4n
@@ -69,7 +68,6 @@ export function FloatingNav({
               <a
                 key={section.id}
                 href={`#${section.id}`}
-                onMouseEnter={() => onCursorLabel(section.label)}
                 aria-current={isActive ? "page" : undefined}
                 className="relative rounded-full px-5 py-3 text-xs font-medium uppercase tracking-[0.08em] text-muted transition"
               >
@@ -90,18 +88,18 @@ export function FloatingNav({
           <button
             type="button"
             onClick={onThemeToggle}
-            onMouseEnter={() => onCursorLabel("Theme")}
             aria-label={`Switch to ${isDark ? "light" : "dark"} mode`}
             className="inline-flex items-center gap-1.5 rounded-full border border-border px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.08em] hover:bg-foreground hover:text-background"
           >
             <span className="text-[15px]">◑</span>
-            <span className="hidden sm:inline">{isDark ? "Light" : "Dark"}</span>
+            <span className="hidden sm:inline">
+              {isDark ? "Light" : "Dark"}
+            </span>
           </button>
           <ContactCtaButton
             href="https://www.cal.eu/affan/15min?overlayCalendar=true"
             label="Let's Talk"
             cursorLabel="Contact"
-            onCursorLabel={onCursorLabel}
             size="compact"
             target="_blank"
             rel="noopener noreferrer"

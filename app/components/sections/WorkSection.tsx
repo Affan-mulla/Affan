@@ -8,12 +8,11 @@ import Border from "../Border";
 
 type WorkSectionProps = {
   caseStudies: CaseStudy[];
-  onCursorLabel: (label: string) => void;
 };
 
 const borderClass = "pointer-events-none absolute h-2 w-2 border-foreground transition-all duration-300 ease-in-out group-hover:h-4 group-hover:w-4 z-50 ";
 
-export function WorkSection({ caseStudies, onCursorLabel }: WorkSectionProps) {
+export function WorkSection({ caseStudies }: WorkSectionProps) {
   return (
     <motion.section
       id="work"
@@ -69,7 +68,6 @@ export function WorkSection({ caseStudies, onCursorLabel }: WorkSectionProps) {
                 <div className="mt-2 flex items-center gap-4 text-xs font-semibold uppercase tracking-widest">
                   <Link
                     href={`/work/${project.slug}`}
-                    onMouseEnter={() => onCursorLabel("Read")}
                     className="group inline-flex items-center gap-1.5 text-(--color-accent)"
                   >
                     View case study →

@@ -65,10 +65,8 @@ const phoneIconVariants: Variants = {
 export function ContactCtaButton({
   ariaLabel,
   className,
-  cursorLabel,
   href,
   label,
-  onCursorLabel,
   rel,
   size = "default",
   target,
@@ -86,8 +84,6 @@ export function ContactCtaButton({
       initial="rest"
       whileHover="hover"
       whileTap={{ scale: 0.98 }}
-      onMouseEnter={() => onCursorLabel?.(cursorLabel ?? label)}
-      
       className={`relative inline-flex items-center overflow-hidden rounded-full border border-border bg-(--color-surface) ${sizeClasses} font-display font-semibold uppercase tracking-[0.08em] shadow-[0_0_0_1px_var(--color-border)] transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 ${className ?? ""}`}
     >
       <motion.span

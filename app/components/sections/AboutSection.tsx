@@ -7,7 +7,6 @@ import { ScrollHighlightText } from "../ScrollHighlightText";
 
 type AboutSectionProps = {
   experienceList: ExperienceItem[];
-  onCursorLabel: (label: string) => void;
   skillPills: string[];
 };
 
@@ -19,7 +18,6 @@ const aboutParagraphs = [
 
 export function AboutSection({
   experienceList,
-  onCursorLabel,
   skillPills,
 }: AboutSectionProps) {
   return (
@@ -55,7 +53,6 @@ export function AboutSection({
             ariaLabel="Book a free discovery call (opens in new tab)"
             label="Book a Free Discovery Call"
             cursorLabel="Contact"
-            onCursorLabel={onCursorLabel}
           />
         </div>
 

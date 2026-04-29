@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { AboutSection } from "@/app/components/sections/AboutSection";
 import { ContactSection } from "@/app/components/sections/ContactSection";
 import { FaqSection } from "@/app/components/sections/FaqSection";
@@ -23,7 +23,7 @@ import { CustomCursor } from "@/app/components/CustomCursor";
 
 export default function Home() {
   const [activeSection, setActiveSection] = useState("home");
-  const [isPastHeroThreshold, setIsPastHeroThreshold] = useState(false);
+  const [isPastHeroThreshold, setIsPastHeroThreshold] = useState({navHidden: false, navCollapsed: false});
   const [isTouch, setIsTouch] = useState(false);
   const [theme, setTheme] = useState<"light" | "dark">("light");
   const [themeInitialized, setThemeInitialized] = useState(false);
@@ -41,7 +41,8 @@ export default function Home() {
       "@type": "Person",
       name: "Affan Mulla",
       jobTitle: "Web Designer & Developer",
-      description: "Building websites and landing pages for local businesses internationally.",
+      description:
+        "Building websites and landing pages for local businesses internationally.",
       email: "mailto:affanmulla077@gmail.com",
       url: "https://affan-mulla.vercel.app",
       sameAs: [
@@ -51,8 +52,12 @@ export default function Home() {
         "https://github.com/Affan-mulla",
       ],
       knowsAbout: [
-        "Website Design", "Local SEO", "Landing Pages", 
-        "Next.js", "Small Business Websites", "E-commerce"
+        "Website Design",
+        "Local SEO",
+        "Landing Pages",
+        "Next.js",
+        "Small Business Websites",
+        "E-commerce",
       ],
       areaServed: ["IN", "GB", "US", "CA", "AE", "AU"],
     }),
@@ -64,7 +69,8 @@ export default function Home() {
       "@context": "https://schema.org",
       "@type": "WebSite",
       name: "Affan Mulla Portfolio",
-      description: "Portfolio website for Affan Mulla, freelance designer and front-end developer.",
+      description:
+        "Portfolio website for Affan Mulla, freelance designer and front-end developer.",
       url: "https://yourdomain.com",
       author: {
         "@type": "Person",
@@ -108,26 +114,57 @@ export default function Home() {
     window.localStorage.setItem("affan-theme", theme);
   }, [theme, themeInitialized]);
 
+  // ADD THIS
   const scrollStateRef = useRef(0);
+  const inactivityTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
+    const HIDE_AFTER_MS = 2500; // hide after 2.5s of inactivity past hero
+    const SCROLL_THRESHOLD = 150; // ignore tiny scroll jitter near top
+
+    const clearInactivity = () => {
+      if (inactivityTimerRef.current) {
+        clearTimeout(inactivityTimerRef.current);
+        inactivityTimerRef.current = null;
+      }
+    };
+
     const handleScroll = () => {
       const hero = document.getElementById("home");
-      if (hero) {
-        setIsPastHeroThreshold(hero.getBoundingClientRect().top <= -96);
-      }
+      const pastHero = hero ? hero.getBoundingClientRect().top <= -900 : false;
+      if (hero) setIsPastHeroThreshold({ navCollapsed: hero.getBoundingClientRect().top <= -52, navHidden: pastHero });
 
       const currentScroll = window.scrollY;
       const isScrollingDown = currentScroll > scrollStateRef.current;
-      
-      // Hide if scrolling down and past 150px, show if scrolling up
-      setNavHidden(isScrollingDown && currentScroll > 150);
-      
+      const pastThreshold = currentScroll > SCROLL_THRESHOLD;
+      console.log({ isScrollingDown, pastThreshold, currentScroll, scrollState: scrollStateRef.current    });
+
+      if (!isScrollingDown) {
+        // Scroll up → always reveal
+        setNavHidden(false);
+        clearInactivity();
+      } else if (pastHero && pastThreshold) {
+        // Scroll down past hero → hide immediately
+        setNavHidden(true);
+        clearInactivity();
+      }
+
+      // Restart inactivity timer on every event past hero
+      if (pastHero && pastThreshold) {
+        clearInactivity();
+        inactivityTimerRef.current = setTimeout(() => {
+          setNavHidden(true);
+        }, HIDE_AFTER_MS);
+      }
+
       scrollStateRef.current = currentScroll;
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      clearInactivity();
+    };
   }, []);
 
   useEffect(() => {
@@ -183,57 +220,58 @@ export default function Home() {
     };
   }, [isTouch]);
 
-  const handleCursorLabel = (label: string) => {
-    if (isTouch) {
-      return;
-    }
 
-    setCursor((previous) => ({ ...previous, label }));
-  };
-
-  const navCollapsed = isPastHeroThreshold || activeSection !== "home";
+  const navCollapsed = isPastHeroThreshold.navCollapsed || activeSection !== "home";
   const isDark = theme === "dark";
 
   return (
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(personStructuredData) }}
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(personStructuredData),
+        }}
       />
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteStructuredData) }}
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(websiteStructuredData),
+        }}
       />
 
-      <CustomCursor cursor={cursor} isTouch={isTouch} />
+      {/* <CustomCursor cursor={cursor} isTouch={isTouch} /> */}
 
-        <main className="relative  flex w-full flex-col gap-16 px-4 pb-16 sm:px-8 sm:pb-20 md:gap-24">
-        
+      <main className="relative  flex w-full flex-col gap-16 px-4 pb-16 sm:px-8 sm:pb-20 md:gap-24">
         <HeroSection
+
           activeSection={activeSection}
           isTouch={isTouch}
           navCollapsed={navCollapsed}
+          navHidden={navHidden}
           navSections={navSections}
-          onCursorLabel={handleCursorLabel}
+          
           onThemeToggle={() => setTheme(isDark ? "light" : "dark")}
           theme={theme}
         />
         <MarqueeSection />
-        <ServicesSection onCursorLabel={handleCursorLabel} />
+        <ServicesSection />
         <ProcessSection />
         <StatsSection />
 
-        <WorkSection caseStudies={caseStudies} onCursorLabel={handleCursorLabel} />
+        <WorkSection
+          caseStudies={caseStudies}
+            
+        />
         <TestimonialsSection testimonials={testimonials} />
         <FaqSection />
 
         <AboutSection
           experienceList={experienceList}
-          onCursorLabel={handleCursorLabel}
+            
           skillPills={skillPills}
         />
 
-        <ContactSection onCursorLabel={handleCursorLabel} />
+        <ContactSection />
       </main>
     </>
   );

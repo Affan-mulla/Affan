@@ -17,8 +17,8 @@ const containerVariants: Variants = {
 type HeroSectionProps = {
   activeSection: string;
   navCollapsed: boolean;
+  navHidden: boolean;
   navSections: NavSection[];
-  onCursorLabel: (label: string) => void;
   onThemeToggle: () => void;
   isTouch: boolean;
   theme: "light" | "dark";
@@ -27,8 +27,8 @@ type HeroSectionProps = {
 export function HeroSection({
   activeSection,
   navCollapsed,
+  navHidden,
   navSections,
-  onCursorLabel,
   onThemeToggle,
   isTouch,
   theme,
@@ -78,10 +78,10 @@ export function HeroSection({
       </address>
 
       <FloatingNav
+        navHidden={navHidden}
         activeSection={activeSection}
         navCollapsed={navCollapsed}
         navSections={navSections}
-        onCursorLabel={onCursorLabel}
         onThemeToggle={onThemeToggle}
         theme={theme}
       />

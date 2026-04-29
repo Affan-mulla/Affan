@@ -8,10 +8,6 @@ import Border from "../Border";
 import type { CurrencyInfo } from "../hooks/useCurrency";
 import { useCurrency } from "../hooks/useCurrency";
 
-type ServicesSectionProps = {
-  onCursorLabel: (label: string) => void;
-};
-
 const PRICES: Record<"USD" | "GBP" | "INR", Record<string, string>> = {
   USD: { Starter: "$499", Growth: "$1,199", Premium: "$2,199" },
   GBP: { Starter: "£399", Growth: "£949", Premium: "£1,749" },
@@ -33,13 +29,11 @@ function getPriceLabel(
 function ServiceCard({
   index,
   isSectionInView,
-  onCursorLabel,
   tier,
   currency,
 }: {
   index: number;
   isSectionInView: boolean;
-  onCursorLabel: (label: string) => void;
   tier: (typeof serviceTiers)[number];
   currency: ReturnType<typeof useCurrency>;
 }) {
@@ -89,7 +83,6 @@ function ServiceCard({
           label="Get Started"
           size="compact"
           cursorLabel="Contact"
-          onCursorLabel={onCursorLabel}
           target="_blank"
           rel="noopener noreferrer"
           ariaLabel="Book a free discovery call (opens in new tab)"
@@ -99,7 +92,7 @@ function ServiceCard({
   );
 }
 
-export function ServicesSection({ onCursorLabel }: ServicesSectionProps) {
+export function ServicesSection() {
   const sectionRef = useRef<HTMLElement | null>(null);
   const isSectionInView = useInView(sectionRef, { once: true, amount: 0.2 });
   const currency = useCurrency();
@@ -129,7 +122,6 @@ export function ServicesSection({ onCursorLabel }: ServicesSectionProps) {
             key={tier.name}
             index={index}
             isSectionInView={isSectionInView}
-            onCursorLabel={onCursorLabel}
             tier={tier}
             currency={currency}
           />
