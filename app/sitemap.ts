@@ -2,7 +2,7 @@ import { MetadataRoute } from "next";
 import { caseStudyPages } from "./components/portfolio-data";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = "https://affanmulla.com"; // replace with real domain later
+  const baseUrl = "https://affan-mulla.vercel.app/"; // replace with real domain later
 
   const caseStudyRoutes = caseStudyPages.map((study) => ({
     url: `${baseUrl}/work/${study.slug}`,
