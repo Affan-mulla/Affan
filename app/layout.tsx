@@ -64,6 +64,9 @@ export default function RootLayout({
       lang="en"
       className={`${inter.variable} ${syne.variable} h-full antialiased`}
     >
+      <head>
+        <meta name="google-site-verification" content="Ky0qIfMeU_mpTMGdF8bKz7vGIeDj81FfpP7BXZhB9kY" />
+      </head>
       <body className="min-h-full flex flex-col">
         <PageTransition>{children}</PageTransition>
       </body>
