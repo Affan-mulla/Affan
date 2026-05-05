@@ -99,7 +99,7 @@ export const serviceTiers: ServiceTier[] = [
     priceUSD: 499,
     description: "Perfect for small local businesses that need a professional online presence fast.",
     deliverables: [
-      "5-page responsive website",
+      "3-page responsive website",
       "Google-ready (SEO basics)",
       "Contact form + Google Maps",
       "Mobile-first design",
@@ -113,7 +113,7 @@ export const serviceTiers: ServiceTier[] = [
     priceUSD: 1199,
     description: "For businesses ready to dominate local search and convert visitors into customers.",
     deliverables: [
-      "Up to 10 pages",
+      "Up to 6 pages",
       "Full local SEO setup",
       "Google Business Profile optimisation",
       "Blog or news section",
@@ -129,13 +129,13 @@ export const serviceTiers: ServiceTier[] = [
     priceUSD: 2199,
     description: "Complete digital presence for established businesses that want to lead their market.",
     deliverables: [
-      "Unlimited pages",
-      "Custom design system",
+      "Multi-page custom website",
+      "Content management system",
       "E-commerce or booking platform",
       "Advanced SEO + content strategy",
       "Performance audit",
       "30-day post-launch support",
-      "21-day delivery",
+      "21 - 28 -day delivery",
     ],
     cta: "Get Started",
   },
@@ -144,26 +144,26 @@ export const serviceTiers: ServiceTier[] = [
 export const testimonials: Testimonial[] = [
   {
     quote:
-      "Affan completely transformed how my portfolio looks. Within a week of launching I had 3 inbound calls from the kind of clients I actually wanted.",
-    name: "Jordan K.",
-    role: "Brand Strategist",
-    company: "Independent",
+      "Within days of launching the new site, we started getting consistent calls from Google. It paid for itself in the first month.",
+    name: "Mark R.",
+    role: "Owner",
+    company: "Plumbing & Heating",
   },
   {
     quote:
-      "The motion details and the overall polish put me in a completely different tier. Clients now assume I charge more before we even talk.",
-    name: "Priya M.",
-    role: "UX Designer",
-    company: "Freelance",
+      "Patients now book directly through the website without calling. It looks professional and actually builds trust.",
+    name: "Dr. Sarah L.",
+    role: "Dentist",
+    company: "SmileCare Clinic",
   },
   {
     quote:
-      "Fast, responsive, knew exactly what to build without me having to explain everything. Rare combination.",
-    name: "Sam T.",
-    role: "Agency Owner",
-    company: "Studio T",
-  },
-];
+      "We went from barely any online inquiries to multiple qualified leads every week. The site positions us like a top firm.",
+    name: "James K.",
+    role: "Attorney",
+    company: "Kline Legal",
+  }
+]
 
 export const caseStudyPages: CaseStudyFull[] = [
   {

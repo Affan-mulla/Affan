@@ -11,7 +11,7 @@ import { useCurrency } from "../hooks/useCurrency";
 const PRICES: Record<"USD" | "GBP" | "INR", Record<string, string>> = {
   USD: { Starter: "$499", Growth: "$1,199", Premium: "$2,199" },
   GBP: { Starter: "£399", Growth: "£949", Premium: "£1,749" },
-  INR: { Starter: "₹15,000", Growth: "₹35,000", Premium: "₹65,000" },
+  INR: { Starter: "₹5,000", Growth: "₹10,000", Premium: "₹20,000" },
 };
 
 function getPriceLabel(
