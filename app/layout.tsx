@@ -30,6 +30,19 @@ export const metadata: Metadata = {
     "affordable website design",
     "Next.js developer",
     "Affan Mulla",
+    "freelance web designer",
+    "web design for cafes",
+    "contractor website design",
+    "service business web design",
+    "Full stack web developer",
+    "Frontend developer",
+    "Best web designer for local businesses",
+    "SEO for local businesses",
+    "Web design for small businesses",
+    "Web design for restaurants",
+    "Web design for contractors",
+    "Web design for service businesses",
+    "Website design and SEO for local businesses",
   ],
   alternates: {
     canonical: "https://affan-mulla.vercel.app",
@@ -66,6 +79,63 @@ export default function RootLayout({
     >
       <head>
         <meta name="google-site-verification" content="Ky0qIfMeU_mpTMGdF8bKz7vGIeDj81FfpP7BXZhB9kY" />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Person",
+              name: "Affan Mulla",
+              jobTitle: "Web Designer & Developer",
+              description:
+                "Building websites and landing pages for local businesses internationally.",
+              email: "mailto:affanmulla077@gmail.com",
+              url: "https://affan-mulla.vercel.app",
+              sameAs: [
+                "https://instagram.com/aff4n_7",
+                "https://x.com/_aff4n_",
+                "https://www.linkedin.com/in/affan-mulla-544341321/",
+                "https://github.com/affanmulla",
+              ],
+              knowsAbout: [
+                "Website Design",
+                "Local SEO",
+                "Landing Pages",
+                "Next.js",
+                "Small Business Websites",
+                "E-commerce",
+              ],
+              areaServed: ["IN", "GB", "US", "CA", "AE", "AU"],
+            }),
+          }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "WebSite",
+              name: "Affan Mulla Portfolio",
+              description:
+                "Portfolio website for Affan Mulla, freelance designer and front-end developer.",
+              url: "https://affan-mulla.vercel.app",
+              sameAs: [
+                "https://instagram.com/aff4n_7",
+                "https://x.com/_aff4n_",
+                "https://www.linkedin.com/in/affan-mulla-544341321/",
+              ],
+              knowsAbout: [
+                "Website Design",
+                "Local SEO",
+                "Landing Pages",
+                "Next.js",
+                "Small Business Websites",
+                "E-commerce",
+              ],
+              areaServed: ["IN", "GB", "US", "CA", "AE", "AU"],
+            }),
+          }}
+        />
       </head>
       <body className="min-h-full flex flex-col">
         <PageTransition>{children}</PageTransition>

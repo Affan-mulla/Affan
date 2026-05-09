@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { AboutSection } from "@/app/components/sections/AboutSection";
 import { ContactSection } from "@/app/components/sections/ContactSection";
 import { FaqSection } from "@/app/components/sections/FaqSection";
@@ -19,7 +19,6 @@ import {
   skillPills,
   testimonials,
 } from "@/app/components/portfolio-data";
-import { CustomCursor } from "@/app/components/CustomCursor";
 
 export default function Home() {
   const [activeSection, setActiveSection] = useState("home");
@@ -238,8 +237,6 @@ export default function Home() {
           __html: JSON.stringify(websiteStructuredData),
         }}
       />
-
-      {/* <CustomCursor cursor={cursor} isTouch={isTouch} /> */}
 
       <main className="relative  flex w-full flex-col gap-16 px-4 pb-16 sm:px-8 sm:pb-20 md:gap-24">
         <HeroSection
