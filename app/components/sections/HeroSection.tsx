@@ -74,7 +74,7 @@ export function HeroSection({
       className="relative grid min-h-[82svh] gap-10 border-b border-border pb-8 pt-28 md:grid-cols-[1.18fr_0.82fr] md:gap-14 md:pt-36"
     >
       <address className="sr-only not-italic">
-        Affan Mulla, Web Designer and Developer for local businesses, Gujarat, India. Email: affanmulla077@gmail.com. Available for projects worldwide.
+        Affan Mulla, Web Designer and Developer for local businesses, Gujarat, India. Email: hello@byaffan.com. Available for projects worldwide.
       </address>
 
       <FloatingNav

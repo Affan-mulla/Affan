@@ -110,7 +110,7 @@ export default function RootLayout({
               jobTitle: "Web Designer & Developer",
               description:
                 "Building websites and landing pages for local businesses internationally.",
-              email: "mailto:affanmulla077@gmail.com",
+              email: "mailto:hello@byaffan.com",
               url: "https://byaffan.com/",
               sameAs: [
                 "https://instagram.com/aff4n_7",

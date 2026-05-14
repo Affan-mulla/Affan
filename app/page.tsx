@@ -42,7 +42,7 @@ export default function Home() {
       jobTitle: "Web Designer & Developer",
       description:
         "Building websites and landing pages for local businesses internationally.",
-      email: "mailto:affanmulla077@gmail.com",
+      email: "mailto:hello@byaffan.com",
       url: "https://affan-mulla.vercel.app",
       sameAs: [
         "https://instagram.com/aff4n_7",

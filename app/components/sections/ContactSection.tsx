@@ -436,13 +436,13 @@ export function ContactSection() {
 
           <button
             onClick={() => {
-              navigator.clipboard.writeText("affanmulla077@gmail.com");
+              navigator.clipboard.writeText("hello@byaffan.com");
               setCopied(true);
               setTimeout(() => setCopied(false), 2000);
             }}
             className="group relative inline-flex w-fit items-center text-sm text-muted transition-colors hover:text-foreground"
           >
-            <span>affanmulla077@gmail.com</span>
+            <span>hello@byaffan.com</span>
             <span className="pointer-events-none absolute left-full top-1/2 ml-2 -translate-y-1/2">
               <AnimatePresence mode="wait">
                 {copied ? (
