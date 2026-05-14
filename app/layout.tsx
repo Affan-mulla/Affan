@@ -78,6 +78,7 @@ export default function RootLayout({
       className={`${inter.variable} ${syne.variable} h-full antialiased`}
     >
       <head>
+        <meta name="google-site-verification" content="r7rZfyi6SFH_2zJPfND71jXWkkUH1RPze9pMg1jhStE" />
         <meta name="google-site-verification" content="Ky0qIfMeU_mpTMGdF8bKz7vGIeDj81FfpP7BXZhB9kY" />
         <script
           type="application/ld+json"
