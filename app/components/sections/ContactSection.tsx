@@ -85,7 +85,7 @@ const socialProfiles: SocialProfileCard[] = [
     accent: "#0A66C2",
     banner:
       "https://pbs.twimg.com/profile_banners/1794432856040599552/1769402162/1080x360",
-    avatar: "https://pbs.twimg.com/profile_images/2015644864675737601/m8438SjA_400x400.jpg",
+    avatar: "/logo.jpg",
     ctaLabel: "Connect",
     theme: "light",
     icon: (
@@ -110,11 +110,11 @@ const socialProfiles: SocialProfileCard[] = [
     href: "https://instagram.com/aff4n_7",
     cursorLabel: "Instagram",
     platform: "Instagram",
-    handle: "aff4n_7",
+    handle: "aff4n_builds",
     name: "Affan Mulla",
     bio: "Portfolio visuals, motion snippets, and behind-the-scenes design process.",
     accent: "#E1306C",
-    avatar: "https://pbs.twimg.com/profile_images/2015644864675737601/m8438SjA_400x400.jpg",
+    avatar: "/logo.jpg",
     ctaLabel: "Follow",
     theme: "instagram",
     icon: (
@@ -145,7 +145,7 @@ const socialProfiles: SocialProfileCard[] = [
     accent: "#1D9BF0",
     banner:
       "https://pbs.twimg.com/profile_banners/1794432856040599552/1769402162/1080x360",
-    avatar: "https://pbs.twimg.com/profile_images/2015644864675737601/m8438SjA_400x400.jpg",
+    avatar: "/logo.jpg",
     ctaLabel: "Follow",
     theme: "dark",
     icon: (
