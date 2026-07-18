@@ -251,9 +251,9 @@ export default function Home() {
           theme={theme}
         />
         <MarqueeSection />
-        <ServicesSection />
+        {/* <ServicesSection /> */}
         <ProcessSection />
-        <StatsSection />
+        {/* <StatsSection /> */}
 
         <WorkSection
           caseStudies={caseStudies}

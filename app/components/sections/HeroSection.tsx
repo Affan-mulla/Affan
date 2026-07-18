@@ -141,7 +141,7 @@ export function HeroSection({
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, ease: "easeOut", delay: 0.6 }}
-          className="max-w-md text-lg leading-9 text-muted"
+          className="max-w-md text-lg leading-7 text-muted"
         >
           I build websites and landing pages for local businesses that want to look
           professional, get found on Google, and win more customers. Based in Gujarat —
@@ -158,14 +158,6 @@ export function HeroSection({
         >
           <span className="h-2 w-2 rounded-full bg-[rgb(0,148,65)]" />
           Available For Work
-        </motion.span>
-        <motion.span
-          initial={{ opacity: 0, x: 20 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1], delay: 0.8 }}
-          className="inline-flex rounded-full border border-border px-4 py-2 text-xs font-semibold uppercase tracking-[0.12em] text-muted"
-        >
-          Gujarat, India
         </motion.span>
         <motion.span
           initial={{ opacity: 0, x: 20 }}

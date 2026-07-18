@@ -116,7 +116,7 @@ textarea {
   transition: border-color 220ms ease, background-color 220ms ease, color 220ms ease, transform 220ms ease;
 }
 
-.cursor {
+/* .cursor {
   position: fixed;
   top: 0;
   left: 0;
@@ -152,22 +152,9 @@ textarea {
   white-space: nowrap;
   box-shadow: 0 0 30px 2px var(--color-border);
   will-change: transform;
-}
+} */
 
-@media (pointer: fine) {
-  .has-custom-cursor a,
-  .has-custom-cursor button,
-  .has-custom-cursor summary,
-  .has-custom-cursor [role="button"] {
-    cursor: none;
-  }
-}
 
-@media (pointer: coarse) {
-  .cursor {
-    display: none;
-  }
-}
 
 @media (prefers-reduced-motion: reduce) {
   *,

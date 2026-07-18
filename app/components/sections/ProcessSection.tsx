@@ -80,10 +80,10 @@ export function ProcessSection() {
       <section className="relative px-4 py-12 sm:px-8 md:hidden">
         <div className="mb-8">
           <p className="mb-3 text-xs font-semibold uppercase tracking-[0.16em] text-muted">
-            My Process
+            Our Process
           </p>
           <h2 className="font-display text-[clamp(2.2rem,8vw,6rem)] font-extrabold leading-[0.9] tracking-[-0.04em]">
-            How it works
+            How we works
           </h2>
         </div>
 
@@ -122,10 +122,10 @@ export function ProcessSection() {
         <section className="relative hidden w-full px-8 py-14 md:block">
           <div className="mb-10">
             <p className="mb-3 text-xs font-semibold uppercase tracking-[0.16em] text-muted">
-              My Process
+              Our Process
             </p>
             <h2 className="font-display text-[clamp(2.2rem,8vw,6rem)] font-extrabold leading-[0.9] tracking-[-0.04em]">
-              How it works
+              How we works
             </h2>
           </div>
 
@@ -159,10 +159,10 @@ export function ProcessSection() {
           <div className="sticky top-0 flex h-fit flex-col overflow-hidden px-8 py-14">
             <div className="mb-10">
               <p className="mb-3 text-xs font-semibold uppercase tracking-[0.16em] text-muted">
-                My Process
+                Our Process
               </p>
               <h2 className="font-display text-[clamp(2.2rem,8vw,6rem)] font-extrabold leading-[0.9] tracking-[-0.04em]">
-                How it works
+                How we works
               </h2>
             </div>
 

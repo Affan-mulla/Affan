@@ -60,7 +60,7 @@ export type CaseStudyFull = {
 
 export const navSections: NavSection[] = [
   { id: "home", label: "Home" },
-  { id: "services", label: "Services" },
+  // { id: "services", label: "Services" },
   { id: "work", label: "Work" },
   { id: "about", label: "About" },
   { id: "contact", label: "Contact" },
@@ -69,15 +69,15 @@ export const navSections: NavSection[] = [
 export const caseStudies: CaseStudy[] = [
   {
     index: "01",
-    slug: "lavenue-bakery",
-    period: "2024",
-    title: "L'Avenue Boulangerie — Artisan Bakery Website",
+    slug: "GreenHaven",
+    period: "2026",
+    title: "Greenhaven Landscaping —  Landscaping Website",
     description:
-      "Full website for a Toronto artisan bakery. Menu, gallery, reservation system, and brand identity built to drive foot traffic and online discovery.",
-    tags: ["Restaurant", "Local Business", "Next.js"],
-    highlights: ["Multi-page site", "Menu & gallery system", "SEO for local search"],
+      "Full website for a landscaping business",
+    tags: ["Landscaping", "Local Business", "SEO"],
+    highlights: ["Multi-page site", "Service & gallery system", "SEO for local search"],
     visual: "linear-gradient(145deg, #2c1a0e 0%, #7a3b1e 55%, #d4854a 100%)",
-    liveUrl: "https://lavenue-bakery.vercel.app/",
+    liveUrl: "https://greenhaven-landscaping.vercel.app/",
   },
   {
     index: "02",
@@ -167,34 +167,34 @@ export const testimonials: Testimonial[] = [
 
 export const caseStudyPages: CaseStudyFull[] = [
   {
-    slug: "lavenue-bakery",
-    title: "L'Avenue Boulangerie — Artisan Bakery Website",
-    period: "2024",
+    slug: "greenhaven",
+    title: "GreenHaven Landscaping — Landscaping Website",
+    period: "2026",
     description:
-      "Full website for a Toronto artisan bakery. Menu, gallery, reservation system, and brand identity built to drive foot traffic and online discovery.",
+      "Full website for a landscaping business. Services, gallery, inquiry system, and brand identity built to drive foot traffic and online discovery.",
     visual: "linear-gradient(145deg, #2c1a0e 0%, #7a3b1e 55%, #d4854a 100%)",
-    client: "L'Avenue Boulangerie, Toronto",
+    client: "GreenHaven Landscaping, Gujarat",
     role: "Web Designer + Frontend Developer",
     sections: [
       {
         type: "brief",
         heading: "The brief",
-        body: "L'Avenue needed a website that matched the warmth and quality of their bakery. They had a loyal local following but no online presence — no way for new customers to find them, no menu online, no reservation system. The goal was to fix all three in under two weeks.",
+        body: "GreenHaven needed a website that matched the warmth and quality of their landscaping services. They had a loyal local following but no online presence — no way for new customers to find them, no portfolio online, no inquiry system. The goal was to fix all three in under two weeks.",
       },
       {
         type: "problem",
         heading: "The problem",
-        body: "Most local bakeries either have no website or a generic template that looks nothing like their brand. L'Avenue's in-store experience is exceptional — rustic, warm, artisan — but nothing online communicated that. Potential customers searching 'artisan bakery Toronto' found nothing. Regulars had no way to check the menu or book a table before visiting.",
+        body: "Most local landscaping companies either have no website or a generic template that looks nothing like their brand. GreenHaven's in-store experience is exceptional — rustic, warm, professional — but nothing online communicated that. Potential customers searching 'landscaping Gujarat' found nothing. Regulars had no way to check the portfolio or inquire about services before visiting.",
       },
       {
         type: "process",
         heading: "What I built",
-        body: "A multi-page Next.js site with a daily menu page, photo gallery with Instagram integration, a reservation request form, and Google Maps embed. The design uses warm cream tones, editorial typography, and full-bleed photography to match the in-store atmosphere. Fully mobile-optimised with local SEO metadata targeting Toronto bakery searches.",
+        body: "A multi-page Next.js site with a services page, photo gallery with Instagram integration, an inquiry form, and Google Maps embed. The design uses warm earth tones, editorial typography, and full-bleed photography to match the in-store atmosphere. Fully mobile-optimised with local SEO metadata targeting Gujarat landscaping searches.",
       },
       {
         type: "outcome",
         heading: "The result",
-        body: "The site launched in 10 days. Within the first month, L'Avenue appeared on the first page of Google for 'artisan bakery Toronto'. Reservation requests came in through the site from day one. The client described it as 'finally looking like the bakery we actually are online'.",
+        body: "The site launched in 10 days. Within the first month, GreenHaven appeared on the first page of Google for 'landscaping Gujarat'. Inquiry requests came in through the site from day one. The client described it as 'finally looking like the business we actually are online'."
       },
     ],
   },
